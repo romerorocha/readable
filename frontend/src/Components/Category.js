@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Container } from 'semantic-ui-react';
 
-class Category extends Component {
-  render() {
-    return <div />;
-  }
-}
+const Category = ({ match }) => {
+  const title = match.params.title;
+
+  return (
+    <Container>
+      <h1>{title}</h1>
+    </Container>
+  );
+};
 
 export default Category;

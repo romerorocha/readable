@@ -1,41 +1,49 @@
 import React, { Component } from 'react';
-import { Menu, Container } from 'semantic-ui-react';
+import { Menu, Icon, Container } from 'semantic-ui-react';
+import { withRouter } from 'react-router';
+import CategoriesMenu from './CategoriesMenu';
 
 class MainMenu extends Component {
   state = {
-    activeItem: 'home'
+    activeMenu: '/'
   };
 
-  handleMenuClick = (e, { name }) => this.setState({ activeItem: name });
+  handleMenuClick = (_, target) => {
+    this.setState({ activeMenu: target.name });
+    this.navigateTo(target.name);
+  };
+
+  navigateTo = path => {
+    if (path !== '/') {
+      path = `/category/${path}`;
+    }
+    this.props.history.push(path);
+  };
 
   render() {
     const { categories } = this.props;
-    const { activeItem } = this.state;
+    const { activeMenu } = this.state;
 
     return (
       <Container>
-        <Menu stackable>
+        <Menu icon="labeled" pointing secondary color="blue">
           <Menu.Item
-            name="home"
-            active={activeItem === 'home'}
+            name="/"
+            active={activeMenu === '/'}
             onClick={this.handleMenuClick}
           >
-            Home
+            <Icon name="home" />
+            home
           </Menu.Item>
-          {categories.map(category => (
-            <Menu.Item
-              key={category.path}
-              name={category.name}
-              active={activeItem === category.path}
-              onClick={this.handleMenuClick}
-            >
-              {category.name}
-            </Menu.Item>
-          ))}
+          <CategoriesMenu
+            categories={categories}
+            activeMenu={activeMenu}
+            action={this.handleMenuClick}
+          />
         </Menu>
       </Container>
     );
   }
 }
 
-export default MainMenu;
+export default withRouter(MainMenu);
