@@ -2,7 +2,7 @@ import React from 'react';
 import { Container } from 'semantic-ui-react';
 
 const Category = ({ match }) => {
-  const title = match.params.title;
+  const title = match.params.category;
 
   return (
     <Container fluid>

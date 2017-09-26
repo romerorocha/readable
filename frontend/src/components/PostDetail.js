@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class PostDetail extends Component {
-  render() {
-    return <div />;
-  }
-}
+const PostDetail = ({ match }) => {
+  const params = match.params;
+  console.log(params);
+  return (
+    <h1>
+      Post '{params.post_id}' of category '{params.category}' in future
+      versions.
+    </h1>
+  );
+};
 
 export default PostDetail;

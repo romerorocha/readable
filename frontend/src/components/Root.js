@@ -15,8 +15,8 @@ const Root = ({ store }) => {
         <Container fluid>
           <MainMenu />
           <Route exact path="/" component={Home} />
-          <Route path="/category/:title" component={Category} />
-          <Route path="/post" component={PostDetail} />
+          <Route exact path="/:category" component={Category} />
+          <Route exact path="/:category/:post_id" component={PostDetail} />
           <Route path="/postform" component={PostForm} />
         </Container>
       </BrowserRouter>

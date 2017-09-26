@@ -15,7 +15,7 @@ class MainMenu extends Component {
 
   navigateTo = path => {
     if (path !== '/') {
-      path = `/category/${path}`;
+      path = `/${path}`;
     }
     this.props.history.push(path);
   };

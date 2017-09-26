@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { Menu, Icon, Container } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 
 class CategoriesMenu extends Component {
   render() {
     const { categories, activeMenu, action } = this.props;
 
-    if (categories === null || Object.keys(categories).length === 0) {
-      return <Container />;
-    }
-
-    return (
-      <Container fluid>
-        {categories.map(category => (
+    return Object.keys(categories).length === 0
+      ? false
+      : categories.map(category => (
           <Menu.Item
             key={category.path}
             name={category.name}
@@ -22,9 +18,7 @@ class CategoriesMenu extends Component {
             <Icon name="tag" />
             {category.name}
           </Menu.Item>
-        ))}
-      </Container>
-    );
+        ));
   }
 }
 
