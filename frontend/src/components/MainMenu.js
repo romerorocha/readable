@@ -1,34 +1,30 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Container } from 'semantic-ui-react';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import CategoriesMenu from './CategoriesMenu';
+import { connect } from 'react-redux';
+import { activateMenu } from '../actions';
 
 class MainMenu extends Component {
-  state = {
-    activeMenu: '/'
-  };
-
   handleMenuClick = (_, target) => {
-    this.setState({ activeMenu: target.name });
+    this.props.activate(target.name);
     this.navigateTo(target.name);
   };
 
   navigateTo = path => {
-    if (path !== '/') {
-      path = `/${path}`;
-    }
+    path = path === 'home' ? '/' : '/'.concat(path);
     this.props.history.push(path);
   };
 
   render() {
-    const { activeMenu } = this.state;
+    const { activeMenu } = this.props;
 
     return (
       <Container fluid>
         <Menu icon="labeled" pointing secondary color="blue">
           <Menu.Item
-            name="/"
-            active={activeMenu === '/'}
+            name="home"
+            active={activeMenu === 'home'}
             onClick={this.handleMenuClick}
           >
             <Icon name="home" />
@@ -41,4 +37,18 @@ class MainMenu extends Component {
   }
 }
 
-export default withRouter(MainMenu);
+const mapStateToProps = state => {
+  return {
+    activeMenu: state.activeMenu
+  };
+};
+
+const mapDispatchToProps = dispatch => ({
+  activate(menu) {
+    dispatch(activateMenu(menu));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withRouter(MainMenu)
+);

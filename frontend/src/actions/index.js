@@ -7,7 +7,7 @@
 
 import * as ReadableApi from '../util/ReadableApi';
 
-export const ACTIVATE_MENU = 'ACTIVE_MENU';
+export const ACTIVATE_MENU = 'ACTIVATE_MENU';
 export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
 
 export const activateMenu = menu => ({

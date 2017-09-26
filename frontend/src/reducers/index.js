@@ -1,7 +1,7 @@
 import { LOAD_CATEGORIES, ACTIVATE_MENU } from '../actions';
 import { combineReducers } from 'redux';
 
-function activeMenu(state = '/', action) {
+function activeMenu(state = 'home', action) {
   switch (action.type) {
     case ACTIVATE_MENU:
       return action.activeMenu;
@@ -10,7 +10,7 @@ function activeMenu(state = '/', action) {
   }
 }
 
-function categories(state = {}, action) {
+function categories(state = [], action) {
   switch (action.type) {
     case LOAD_CATEGORIES:
       return action.categories;
