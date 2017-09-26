@@ -1,15 +1,22 @@
-import { LOAD_CATEGORIES } from '../actions';
+import { LOAD_CATEGORIES, ACTIVATE_MENU } from '../actions';
+import { combineReducers } from 'redux';
 
-function categories(state = {}, action) {
+function activeMenu(state = '/', action) {
   switch (action.type) {
-    case LOAD_CATEGORIES:
-      return {
-        ...state,
-        categories: action.categories
-      };
+    case ACTIVATE_MENU:
+      return action.activeMenu;
     default:
       return state;
   }
 }
 
-export default categories;
+function categories(state = {}, action) {
+  switch (action.type) {
+    case LOAD_CATEGORIES:
+      return action.categories;
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({ categories, activeMenu });

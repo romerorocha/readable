@@ -1,29 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
-import App from '../components/App';
+import MainMenu from './MainMenu';
+import Home from '../components/Home';
 import Category from '../components/Category';
 import PostDetail from '../components/PostDetail';
 import PostForm from '../components/PostForm';
-import MainMenu from '../components/MainMenu.js';
 import { Container } from 'semantic-ui-react';
 
-class Root extends Component {
-  render() {
-    return (
-      <Provider store={this.props.store}>
-        <BrowserRouter>
-          <Container>
-            <Route path="/" component={MainMenu} />
-            <Route exact path="/" component={App} />
-            <Route path="/category/:title" component={Category} />
-            <Route exact path="/post" component={PostDetail} />
-            <Route exact path="/postform" component={PostForm} />
-          </Container>
-        </BrowserRouter>
-      </Provider>
-    );
-  }
-}
+const Root = ({ store }) => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <Container fluid>
+          <MainMenu />
+          <Route exact path="/" component={Home} />
+          <Route path="/category/:title" component={Category} />
+          <Route path="/post" component={PostDetail} />
+          <Route path="/postform" component={PostForm} />
+        </Container>
+      </BrowserRouter>
+    </Provider>
+  );
+};
 
 export default Root;

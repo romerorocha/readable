@@ -1,14 +1,12 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
 
-const Category = ({ match }) => {
-  const title = match.params.title;
-
+const Home = () => {
   return (
     <Container fluid>
-      <h1>{title}</h1>
+      <h1>Home</h1>
     </Container>
   );
 };
 
-export default Category;
+export default Home;

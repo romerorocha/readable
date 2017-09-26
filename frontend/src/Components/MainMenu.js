@@ -24,7 +24,7 @@ class MainMenu extends Component {
     const { activeMenu } = this.state;
 
     return (
-      <Container>
+      <Container fluid>
         <Menu icon="labeled" pointing secondary color="blue">
           <Menu.Item
             name="/"
@@ -34,10 +34,7 @@ class MainMenu extends Component {
             <Icon name="home" />
             home
           </Menu.Item>
-          <CategoriesMenu
-            activeMenu={activeMenu}
-            action={this.handleMenuClick}
-          />
+          <CategoriesMenu action={this.handleMenuClick} />
         </Menu>
       </Container>
     );

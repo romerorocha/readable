@@ -3,11 +3,7 @@ import { Container } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
-    return (
-      <Container>
-        <h1>Home</h1>
-      </Container>
-    );
+    return <Container />;
   }
 }
 
