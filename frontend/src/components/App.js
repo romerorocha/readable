@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
 
-class Home extends Component {
+class App extends Component {
   render() {
     return (
       <Container>
@@ -11,4 +11,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default App;

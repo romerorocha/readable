@@ -21,7 +21,6 @@ class MainMenu extends Component {
   };
 
   render() {
-    const { categories } = this.props;
     const { activeMenu } = this.state;
 
     return (
@@ -36,7 +35,6 @@ class MainMenu extends Component {
             home
           </Menu.Item>
           <CategoriesMenu
-            categories={categories}
             activeMenu={activeMenu}
             action={this.handleMenuClick}
           />
