@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Container } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { activateMenu } from '../actions/activateMenu';
 
-const Home = () => {
-  return (
-    <Container fluid>
-      <h1>Home</h1>
-    </Container>
-  );
-};
+class Home extends Component {
+  render() {
+    return (
+      <Container fluid>
+        <h1>home</h1>
+      </Container>
+    );
+  }
+}
 
-export default Home;
+const mapDispatchToProps = dispatch => ({
+  activate(menu) {
+    dispatch(activateMenu(menu));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(Home);

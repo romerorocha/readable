@@ -1,32 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
-import { connect } from 'react-redux';
 
-class CategoriesMenu extends Component {
-  render() {
-    const { categories, activeMenu, action } = this.props;
+const CategoriesMenu = ({ categories, activeMenu, action }) => {
+  const categoriesMenu = categories.map(category => (
+    <Menu.Item
+      key={category.path}
+      name={category.name}
+      active={category.path === activeMenu}
+      onClick={action}
+    >
+      <Icon name="tag" />
+      {category.name}
+    </Menu.Item>
+  ));
 
-    return Object.keys(categories).length === 0
-      ? false
-      : categories.map(category => (
-          <Menu.Item
-            key={category.path}
-            name={category.name}
-            active={category.path === activeMenu}
-            onClick={action}
-          >
-            <Icon name="tag" />
-            {category.name}
-          </Menu.Item>
-        ));
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    categories: state.categories,
-    activeMenu: state.activeMenu
-  };
+  return Object.keys(categories).length > 0 ? categoriesMenu : null;
 };
 
-export default connect(mapStateToProps)(CategoriesMenu);
+export default CategoriesMenu;

@@ -1,7 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
-import { fetchCategories } from '../actions';
 import reducer from '../reducers';
 
 const configureStore = () => {
@@ -12,15 +11,8 @@ const configureStore = () => {
 
   const store = createStore(
     reducer,
-    composeEnhancers(
-      applyMiddleware(
-        thunkMiddleware, // lets us dispatch() functions
-        loggerMiddleware // neat middleware that logs actions
-      )
-    )
+    composeEnhancers(applyMiddleware(thunkMiddleware, loggerMiddleware))
   );
-
-  store.dispatch(fetchCategories());
 
   return store;
 };

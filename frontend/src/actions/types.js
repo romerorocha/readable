@@ -1,0 +1,2 @@
+export const ACTIVATE_MENU = 'ACTIVATE_MENU';
+export const LOAD_CATEGORIES = 'LOAD_CATEGORIES';
