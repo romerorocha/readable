@@ -1,4 +1,4 @@
-import { LOAD_CATEGORIES } from '../actions/types';
+import { LOAD_CATEGORIES } from '../actions';
 
 function categories(state = [], action) {
   switch (action.type) {

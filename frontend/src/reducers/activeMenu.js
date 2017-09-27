@@ -1,4 +1,4 @@
-import { ACTIVATE_MENU } from '../actions/types';
+import { ACTIVATE_MENU } from '../actions';
 
 function activeMenu(state = '/', action) {
   switch (action.type) {
