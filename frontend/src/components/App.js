@@ -1,11 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
-import MainMenu from './MainMenu';
+import MainMenu from './Menu/MainMenu';
 import Home from '../components/Home';
 import Category from '../components/Category';
-import PostDetail from '../components/PostDetail';
-import PostForm from '../components/PostForm';
+import PostDetail from '../components/Post/PostDetail';
+import PostForm from '../components/Post/PostForm';
 import { Container } from 'semantic-ui-react';
 
 const App = ({ store }) => {

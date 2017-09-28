@@ -9,7 +9,7 @@ const CategoriesMenu = ({ categories, activeMenu, action }) => {
       active={category.path === activeMenu}
       onClick={action}
     >
-      <Icon name="tag" />
+      <Icon name={category.icon} />
       {category.name}
     </Menu.Item>
   ));

@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import CategoriesMenu from './CategoriesMenu';
 import HomeMenu from './HomeMenu';
 import { connect } from 'react-redux';
-import { activateMenu } from '../actions/activateMenu';
-import { fetchCategories } from '../actions/categories';
+import { activateMenu } from '../../actions/activateMenu';
+import { fetchCategories } from '../../actions/categories';
 
 class MainMenu extends Component {
   componentWillMount() {
@@ -49,6 +49,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(MainMenu)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainMenu));
