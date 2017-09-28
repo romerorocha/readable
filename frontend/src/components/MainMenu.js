@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Container } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import CategoriesMenu from './CategoriesMenu';
 import HomeMenu from './HomeMenu';
@@ -21,16 +21,14 @@ class MainMenu extends Component {
     const { categories, activeMenu } = this.props;
 
     return (
-      <Container fluid>
-        <Menu icon="labeled" pointing secondary color="blue">
-          <HomeMenu activeMenu={activeMenu} action={this.handleMenuClick} />
-          <CategoriesMenu
-            categories={categories}
-            activeMenu={activeMenu}
-            action={this.handleMenuClick}
-          />
-        </Menu>
-      </Container>
+      <Menu icon="labeled" pointing secondary color="blue">
+        <HomeMenu activeMenu={activeMenu} action={this.handleMenuClick} />
+        <CategoriesMenu
+          categories={categories}
+          activeMenu={activeMenu}
+          action={this.handleMenuClick}
+        />
+      </Menu>
     );
   }
 }

@@ -8,7 +8,7 @@ import PostDetail from '../components/PostDetail';
 import PostForm from '../components/PostForm';
 import { Container } from 'semantic-ui-react';
 
-const Root = ({ store }) => {
+const App = ({ store }) => {
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -24,4 +24,4 @@ const Root = ({ store }) => {
   );
 };
 
-export default Root;
+export default App;

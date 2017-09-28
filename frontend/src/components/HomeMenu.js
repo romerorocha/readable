@@ -5,7 +5,7 @@ const HomeMenu = ({ activeMenu, action }) => {
   return (
     <Menu.Item name="/" active={activeMenu === '/'} onClick={action}>
       <Icon name="home" />
-      home
+      Readable
     </Menu.Item>
   );
 };
