@@ -2,24 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { activateMenu } from '../actions/activateMenu';
 import { fetchAllPosts } from '../actions/posts';
-import { Container, Header } from 'semantic-ui-react';
-import Posts from './Post/Posts';
+import { Container, Header, Divider } from 'semantic-ui-react';
+import SortedPosts from './Post/SortedPosts';
 
 class Home extends Component {
   componentWillMount() {
+    this.props.activate('/');
     this.props.fetchPosts();
   }
 
   render() {
-    const { posts } = this.props;
-
-    return Object.keys(posts).length === 0 ? (
-      <Container />
-    ) : (
+    return (
       <Container>
-        <Header as="h3">Posts by vote score</Header>
-
-        <Posts posts={posts} />
+        <Header as="h3">All Posts</Header>
+        <Divider />
+        <SortedPosts />
       </Container>
     );
   }

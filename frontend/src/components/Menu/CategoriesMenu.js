@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
 
 const CategoriesMenu = ({ categories, activeMenu, action }) => {
-  const categoriesMenu = categories.map(category => (
+  return categories.map(category => (
     <Menu.Item
       key={category.path}
       name={category.name}
@@ -13,8 +13,6 @@ const CategoriesMenu = ({ categories, activeMenu, action }) => {
       {category.name}
     </Menu.Item>
   ));
-
-  return Object.keys(categories).length > 0 ? categoriesMenu : null;
 };
 
 export default CategoriesMenu;

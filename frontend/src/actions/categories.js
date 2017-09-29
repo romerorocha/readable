@@ -3,8 +3,7 @@ import { LOAD_CATEGORIES } from './index';
 
 export const loadCategories = categories => ({
   type: LOAD_CATEGORIES,
-  categories: categories,
-  receivedAt: Date.now()
+  categories: categories
 });
 
 export const fetchCategories = () => async dispatch => {

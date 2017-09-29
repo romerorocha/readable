@@ -1,12 +1,19 @@
-import { ALL_POSTS } from '../actions/index';
+import { GET_POSTS, SORT_POSTS_BY } from '../actions/index';
 
-const posts = (state = [], action) => {
+export const posts = (state = [], action) => {
   switch (action.type) {
-    case ALL_POSTS:
+    case GET_POSTS:
       return action.posts;
     default:
       return state;
   }
 };
 
-export default posts;
+export const postsSortedBy = (state = 'VOTE_SCORE', action) => {
+  switch (action.type) {
+    case SORT_POSTS_BY:
+      return action.sorting;
+    default:
+      return state;
+  }
+};

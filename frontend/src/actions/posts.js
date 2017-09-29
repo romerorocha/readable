@@ -1,13 +1,17 @@
 import * as ReadableApi from '../util/ReadableApi';
-import { ALL_POSTS } from './index';
+import { GET_POSTS, SORT_POSTS_BY } from './index';
 
-export const getAllPosts = posts => ({
-  type: ALL_POSTS,
-  posts: posts,
-  receivedAt: Date.now()
+export const getPosts = posts => ({
+  type: GET_POSTS,
+  posts: posts
 });
 
 export const fetchAllPosts = () => async dispatch => {
   const posts = await ReadableApi.getAllPosts();
-  return dispatch(getAllPosts(posts));
+  return dispatch(getPosts(posts));
 };
+
+export const sortPostsBy = sorting => ({
+  type: SORT_POSTS_BY,
+  sorting: sorting
+});
