@@ -8,29 +8,18 @@ const Post = ({ post }) => {
   return (
     <Card>
       <Card.Content>
-        <Image
-          floated="right"
-          size="mini"
-          src={require(`../../img/${post.category}.png`)}
-        />
+        <Image floated="right" size="mini" src={require(`../../img/${post.category}.png`)} />
         <Link to="/postform">
           <Card.Header className="ui header">{post.title}</Card.Header>
           <Card.Meta>
             <strong>{post.author}</strong> in {postDate}
           </Card.Meta>
-          <Card.Description>
-            Steve wants to add you to the group <strong>best friends</strong>
-          </Card.Description>
+          <Card.Description>{post.body}</Card.Description>
         </Link>
       </Card.Content>
       <Card.Content extra>
         <Link to="/postform">
-          <Button
-            content="Delete"
-            icon="remove"
-            labelPosition="left"
-            size="small"
-          />
+          <Button content="Delete" icon="remove" labelPosition="left" size="small" />
         </Link>
         <Button
           content="Vote"

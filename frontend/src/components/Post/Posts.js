@@ -1,5 +1,6 @@
 import React from 'react';
 import Post from './Post';
+import { TIMESTAMP, VOTE_SCORE } from '../../util/Constants';
 import { Card, Container, Button, Divider } from 'semantic-ui-react';
 
 const Posts = ({ posts, sortBy }) => {

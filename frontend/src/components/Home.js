@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { activateMenu } from '../actions/activateMenu';
 import { fetchAllPosts } from '../actions/posts';
 import { Container, Header, Divider } from 'semantic-ui-react';
-import SortedPosts from './Post/SortedPosts';
+import SortedPosts from '../containers/SortedPosts';
 
 class Home extends Component {
   componentWillMount() {
