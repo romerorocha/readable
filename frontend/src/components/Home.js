@@ -2,30 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { activateMenu } from '../actions/activateMenu';
 import { fetchAllPosts } from '../actions/posts';
-import { Container, Header, Divider } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 import SortedPosts from '../containers/SortedPosts';
+import { ALL_POSTS } from '../util/Constants';
 
 class Home extends Component {
   componentWillMount() {
-    this.props.activate('/');
+    this.props.activate(ALL_POSTS);
     this.props.fetchPosts();
   }
 
   render() {
     return (
-      <Container>
+      <Container fluid>
         <Header as="h3">All Posts</Header>
-        <Divider />
         <SortedPosts />
       </Container>
     );
   }
 }
-
-const mapStateToProps = state => ({
-  posts: state.posts
-});
-
 const mapDispatchToProps = dispatch => ({
   activate(menu) {
     dispatch(activateMenu(menu));
@@ -35,4 +30,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);

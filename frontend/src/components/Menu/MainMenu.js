@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Menu } from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
 import CategoriesMenu from './CategoriesMenu';
 import HomeMenu from './HomeMenu';
 import { connect } from 'react-redux';
@@ -12,17 +11,12 @@ class MainMenu extends Component {
     this.props.fetchMenuItens();
   }
 
-  handleMenuClick = (_, target) => {
-    this.props.activate(target.name);
-    this.props.history.push(target.name);
-  };
-
   render() {
     const { categories, activeMenu } = this.props;
 
     return (
       <Menu icon="labeled" pointing secondary color="blue">
-        <HomeMenu activeMenu={activeMenu} action={this.handleMenuClick} />
+        <HomeMenu activeMenu={activeMenu} />
         <CategoriesMenu
           categories={categories}
           activeMenu={activeMenu}
@@ -49,6 +43,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withRouter(MainMenu)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(MainMenu);

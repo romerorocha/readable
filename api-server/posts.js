@@ -22,6 +22,16 @@ const defaultData = {
     category: 'redux',
     voteScore: -5,
     deleted: false
+  },
+    "63bada44a54d11e7abc4cec278b6b50a": {
+    id: '63bada44a54d11e7abc4cec278b6b50a',
+    timestamp: 1468479766000,
+    title: 'There\'s already a thread about that.',
+    body: 'Learn how to check if you\'re not the first to ask something!',
+    author: 'slackmentor',
+    category: 'udacity',
+    voteScore: 7,
+    deleted: false
   }
 }
 

@@ -1,12 +1,16 @@
 import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
+import { ALL_POSTS } from '../../util/Constants';
+import { Link } from 'react-router-dom';
 
-const HomeMenu = ({ activeMenu, action }) => {
+const HomeMenu = ({ activeMenu }) => {
   return (
-    <Menu.Item name="/" active={activeMenu === '/'} onClick={action}>
-      <Icon name="home" />
-      Readable
-    </Menu.Item>
+    <Link to="/">
+      <Menu.Item name={ALL_POSTS} active={activeMenu === ALL_POSTS}>
+        <Icon name="home" />
+        Readable
+      </Menu.Item>
+    </Link>
   );
 };
 

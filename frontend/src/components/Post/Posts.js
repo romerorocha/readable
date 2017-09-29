@@ -1,28 +1,15 @@
 import React from 'react';
 import Post from './Post';
-import { TIMESTAMP, VOTE_SCORE } from '../../util/Constants';
-import { Card, Container, Button, Divider } from 'semantic-ui-react';
+import { Item, Container } from 'semantic-ui-react';
+import SortByBar from './SortByBar';
 
-const Posts = ({ posts, sortBy }) => {
-  const handleSorting = (e, target) => {
-    sortBy(target.name.toUpperCase());
-  };
-
+const Posts = ({ posts }) => {
   return (
-    <Container>
-      <Button.Group basic attached="bottom">
-        <Button name="vote_score" onClick={handleSorting}>
-          Sort by votes
-        </Button>
-        <Button.Or />
-        <Button name="timestamp" onClick={handleSorting}>
-          Sort by date
-        </Button>
-      </Button.Group>
-      <Divider />
-      <Card.Group itemsPerRow="1" stackable>
+    <Container fluid>
+      <SortByBar />
+      <Item.Group divided>
         {posts.map(post => <Post key={post.id} post={post} />)}
-      </Card.Group>
+      </Item.Group>
     </Container>
   );
 };

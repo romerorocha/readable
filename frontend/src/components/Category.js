@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { activateMenu } from '../actions/activateMenu';
+import SortedPosts from '../containers/SortedPosts';
 
 class Category extends Component {
   componentWillMount() {
-    //TODO Melhorar duplicação de chamadas
     this.props.activate(this.props.match.params.category);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const category = nextProps.match.params.category;
+
+    if (this.props.match.params.category !== category) {
+      this.props.activate(category);
+    }
   }
 
   render() {
     const { category } = this.props.match.params;
     const { categories } = this.props;
 
-    const categoryFound = (
+    return (
       <Container fluid>
-        <h1>{category}</h1>
+        <Header as="h3">{category}</Header>
+        {categories.includes(category) && <SortedPosts />}
       </Container>
     );
-
-    return categories.includes(category) ? categoryFound : <Container />;
   }
 }
 
