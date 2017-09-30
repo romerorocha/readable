@@ -4,7 +4,7 @@ import { sortPostsBy } from '../../actions/posts';
 import { TIMESTAMP, VOTE_SCORE } from '../../util/Constants';
 import { Button, Container } from 'semantic-ui-react';
 
-const SortByBar = ({ sortBy, sorting }) => {
+const OrderByButtons = ({ sortBy, sorting }) => {
   const handleSorting = (e, target) => {
     sortBy(target.name);
   };
@@ -42,4 +42,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortByBar);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderByButtons);

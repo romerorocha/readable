@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Item } from 'semantic-ui-react';
+import { Item } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import VoteButtons from './VoteButtons';
 
 const Post = ({ post }) => {
   const postDate = new Date(post.timestamp).toLocaleString();
@@ -16,21 +17,13 @@ const Post = ({ post }) => {
           <Item.Header className="ui header">{post.title}</Item.Header>
           <Item.Meta>
             <span>
-              <strong>{post.author}</strong> in {postDate}
+              <strong>{post.author}</strong> - {postDate}
             </span>
           </Item.Meta>
         </Link>
         <Item.Description>{post.body}</Item.Description>
         <Item.Extra>
-          <Link to="/postform">
-            <Button
-              content="Vote"
-              icon="heart"
-              label={{ basic: true, content: post.voteScore }}
-              labelPosition="right"
-              size="small"
-            />
-          </Link>
+          <VoteButtons voteScore={post.voteScore} />
         </Item.Extra>
       </Item.Content>
     </Item>
