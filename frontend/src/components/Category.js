@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { activateMenu } from '../actions/activateMenu';
 import { fetchPostsByCategory } from '../actions/posts';
 import SortedPosts from '../containers/SortedPosts';
+import Error404 from './Error404';
 
 class Category extends Component {
   componentWillMount() {
@@ -27,15 +28,12 @@ class Category extends Component {
     return (
       <Container fluid>
         <Breadcrumb size="big">
-          <Breadcrumb.Divider icon="right chevron" />
           <Breadcrumb.Section>home</Breadcrumb.Section>
-          <Breadcrumb.Divider icon="right chevron" />
-          <Breadcrumb.Section>category</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right chevron" />
           <Breadcrumb.Section active>{category}</Breadcrumb.Section>
         </Breadcrumb>
         <Divider />
-        {categories.includes(category) && <SortedPosts />}
+        {categories.includes(category) ? <SortedPosts /> : <Error404 />}
       </Container>
     );
   }

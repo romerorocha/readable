@@ -16,7 +16,6 @@ class Home extends Component {
     return (
       <Container fluid>
         <Breadcrumb size="big">
-          <Breadcrumb.Divider icon="right chevron" />
           <Breadcrumb.Section>home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right chevron" />
           <Breadcrumb.Section active>all posts</Breadcrumb.Section>
