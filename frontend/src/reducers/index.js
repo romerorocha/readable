@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import activeMenu from './activeMenu';
+import activeMenu from './menu';
 import categories from './categories';
 import { posts, postsSorting } from './posts';
 

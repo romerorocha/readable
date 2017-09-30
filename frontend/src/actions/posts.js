@@ -1,9 +1,9 @@
 import * as ReadableApi from '../util/ReadableApi';
-import { GET_POSTS, SORT_POSTS_BY } from './index';
+import { GET_POSTS, SORT_POSTS_BY, VOTE_ON_POST } from './types';
 
 export const getPosts = posts => ({
   type: GET_POSTS,
-  posts: posts
+  posts
 });
 
 export const fetchAllPosts = () => async dispatch => {
@@ -18,5 +18,15 @@ export const fetchPostsByCategory = category => async dispatch => {
 
 export const sortPostsBy = sorting => ({
   type: SORT_POSTS_BY,
-  sorting: sorting
+  sorting
 });
+
+export const voteFor = post => ({
+  type: VOTE_ON_POST,
+  post
+});
+
+export const voteOnPost = (id, vote) => async dispatch => {
+  const post = await ReadableApi.voteOnPost(id, vote);
+  return dispatch(voteFor(post));
+};

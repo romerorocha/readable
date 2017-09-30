@@ -1,5 +1,5 @@
 import * as ReadableApi from '../util/ReadableApi';
-import { LOAD_CATEGORIES } from './index';
+import { LOAD_CATEGORIES } from './types';
 
 export const loadCategories = categories => ({
   type: LOAD_CATEGORIES,

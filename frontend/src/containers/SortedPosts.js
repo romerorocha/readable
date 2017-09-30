@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Posts from '../components/Post/Posts';
 import { ALL_POSTS } from '../util/Constants';
+import { voteOnPost } from '../actions/posts';
 
 const getPosts = (posts, field, activeCategory) => {
   switch (activeCategory) {
@@ -19,6 +20,12 @@ const mapStateToProps = state => {
   };
 };
 
-const SortedPosts = connect(mapStateToProps)(Posts);
+const mapDispatchToProps = dispatch => ({
+  voteAction: (id, vote) => {
+    dispatch(voteOnPost(id, vote));
+  }
+});
+
+const SortedPosts = connect(mapStateToProps, mapDispatchToProps)(Posts);
 
 export default SortedPosts;

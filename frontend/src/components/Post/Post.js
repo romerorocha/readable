@@ -3,8 +3,12 @@ import { Item } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import VoteButtons from './VoteButtons';
 
-const Post = ({ post }) => {
+const Post = ({ post, voteAction }) => {
   const postDate = new Date(post.timestamp).toLocaleString();
+
+  const handleVote = vote => {
+    voteAction(post.id, vote);
+  };
 
   return (
     <Item>
@@ -23,7 +27,7 @@ const Post = ({ post }) => {
         </Link>
         <Item.Description>{post.body}</Item.Description>
         <Item.Extra>
-          <VoteButtons voteScore={post.voteScore} />
+          <VoteButtons voteScore={post.voteScore} voteAction={handleVote} />
         </Item.Extra>
       </Item.Content>
     </Item>

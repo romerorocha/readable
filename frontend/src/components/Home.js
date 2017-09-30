@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Divider, Breadcrumb } from 'semantic-ui-react';
 import { ALL_POSTS } from '../util/Constants';
-import { activateMenu } from '../actions/activateMenu';
+import { activateMenu } from '../actions/menu';
 import { fetchAllPosts } from '../actions/posts';
 import SortedPosts from '../containers/SortedPosts';
 
 class Home extends Component {
   componentWillMount() {
-    this.props.activate(ALL_POSTS);
     this.props.fetchPosts();
+    this.props.activate(ALL_POSTS);
   }
 
   render() {

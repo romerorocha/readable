@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Divider, Breadcrumb } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { activateMenu } from '../actions/activateMenu';
+import { activateMenu } from '../actions/menu';
 import { fetchPostsByCategory } from '../actions/posts';
 import SortedPosts from '../containers/SortedPosts';
 import Error404 from './Error404';

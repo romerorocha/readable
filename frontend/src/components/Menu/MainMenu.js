@@ -3,7 +3,6 @@ import { Menu } from 'semantic-ui-react';
 import CategoriesMenu from './CategoriesMenu';
 import HomeMenu from './HomeMenu';
 import { connect } from 'react-redux';
-import { activateMenu } from '../../actions/activateMenu';
 import { fetchCategories } from '../../actions/categories';
 
 class MainMenu extends Component {
@@ -31,9 +30,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  activate(menu) {
-    dispatch(activateMenu(menu));
-  },
   fetchMenuItens() {
     dispatch(fetchCategories());
   }
