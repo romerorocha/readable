@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Header, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { activateMenu } from '../actions/activateMenu';
+import { fetchPostsByCategory } from '../actions/posts';
 import SortedPosts from '../containers/SortedPosts';
 
 class Category extends Component {
   componentWillMount() {
-    this.props.activate(this.props.match.params.category);
+    const category = this.props.match.params.category;
+    this.props.activate(category);
+    this.props.fetchPosts(category); //TODO verificar se precisa mesmo consultar os posts todas as vezes
   }
 
   componentWillReceiveProps(nextProps) {
     const category = nextProps.match.params.category;
-
     if (this.props.match.params.category !== category) {
       this.props.activate(category);
+      this.props.fetchPosts(category); //TODO verificar se precisa mesmo consultar os posts todas as vezes
     }
   }
 
@@ -24,6 +27,7 @@ class Category extends Component {
     return (
       <Container fluid>
         <Header as="h3">{category}</Header>
+        <Divider />
         {categories.includes(category) && <SortedPosts />}
       </Container>
     );
@@ -37,6 +41,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   activate(menu) {
     dispatch(activateMenu(menu));
+  },
+  fetchPosts(category) {
+    dispatch(fetchPostsByCategory(category));
   }
 });
 

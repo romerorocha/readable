@@ -11,6 +11,11 @@ export const fetchAllPosts = () => async dispatch => {
   return dispatch(getPosts(posts));
 };
 
+export const fetchPostsByCategory = category => async dispatch => {
+  const posts = await ReadableApi.getPosts(category);
+  return dispatch(getPosts(posts));
+};
+
 export const sortPostsBy = sorting => ({
   type: SORT_POSTS_BY,
   sorting: sorting

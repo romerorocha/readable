@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Container, Header, Divider } from 'semantic-ui-react';
+import { ALL_POSTS } from '../util/Constants';
 import { activateMenu } from '../actions/activateMenu';
 import { fetchAllPosts } from '../actions/posts';
-import { Container, Header } from 'semantic-ui-react';
 import SortedPosts from '../containers/SortedPosts';
-import { ALL_POSTS } from '../util/Constants';
 
 class Home extends Component {
   componentWillMount() {
@@ -16,6 +16,7 @@ class Home extends Component {
     return (
       <Container fluid>
         <Header as="h3">All Posts</Header>
+        <Divider />
         <SortedPosts />
       </Container>
     );

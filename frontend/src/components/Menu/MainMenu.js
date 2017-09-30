@@ -17,11 +17,7 @@ class MainMenu extends Component {
     return (
       <Menu icon="labeled" pointing secondary color="blue">
         <HomeMenu activeMenu={activeMenu} />
-        <CategoriesMenu
-          categories={categories}
-          activeMenu={activeMenu}
-          action={this.handleMenuClick}
-        />
+        <CategoriesMenu categories={categories} activeMenu={activeMenu} />
       </Menu>
     );
   }
