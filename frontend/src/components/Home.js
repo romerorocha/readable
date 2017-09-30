@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Header, Divider } from 'semantic-ui-react';
+import { Container, Divider, Breadcrumb } from 'semantic-ui-react';
 import { ALL_POSTS } from '../util/Constants';
 import { activateMenu } from '../actions/activateMenu';
 import { fetchAllPosts } from '../actions/posts';
@@ -15,7 +15,12 @@ class Home extends Component {
   render() {
     return (
       <Container fluid>
-        <Header as="h3">All Posts</Header>
+        <Breadcrumb size="big">
+          <Breadcrumb.Divider icon="right chevron" />
+          <Breadcrumb.Section>home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right chevron" />
+          <Breadcrumb.Section active>all posts</Breadcrumb.Section>
+        </Breadcrumb>
         <Divider />
         <SortedPosts />
       </Container>

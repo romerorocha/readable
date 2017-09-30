@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Divider } from 'semantic-ui-react';
+import { Container, Divider, Breadcrumb } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { activateMenu } from '../actions/activateMenu';
 import { fetchPostsByCategory } from '../actions/posts';
@@ -26,7 +26,14 @@ class Category extends Component {
 
     return (
       <Container fluid>
-        <Header as="h3">{category}</Header>
+        <Breadcrumb size="big">
+          <Breadcrumb.Divider icon="right chevron" />
+          <Breadcrumb.Section>home</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right chevron" />
+          <Breadcrumb.Section>category</Breadcrumb.Section>
+          <Breadcrumb.Divider icon="right chevron" />
+          <Breadcrumb.Section active>{category}</Breadcrumb.Section>
+        </Breadcrumb>
         <Divider />
         {categories.includes(category) && <SortedPosts />}
       </Container>
