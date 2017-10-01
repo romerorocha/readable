@@ -16,7 +16,7 @@ const App = ({ store }) => {
           <MainMenu />
           <Route exact path="/" component={Home} />
           <Route exact path="/:category" component={Category} />
-          <Route exact path="/:category/:post_id" component={PostDetail} />
+          <Route exact path="/:category/:postId" component={PostDetail} />
           <Route path="/postform" component={PostForm} />
         </Container>
       </BrowserRouter>

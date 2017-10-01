@@ -14,7 +14,7 @@ class MainMenu extends Component {
     const { categories, activeMenu } = this.props;
 
     return (
-      <Menu icon="labeled" pointing secondary color="blue">
+      <Menu fixed="top" icon="labeled" inverted color="black">
         <HomeMenu activeMenu={activeMenu} />
         <CategoriesMenu categories={categories} activeMenu={activeMenu} />
       </Menu>

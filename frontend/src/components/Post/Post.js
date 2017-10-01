@@ -17,7 +17,7 @@ const Post = ({ post, voteAction }) => {
         src={require(`../../img/${post.category}-small.png`)}
       />
       <Item.Content>
-        <Link to="/postform">
+        <Link to={`/${post.category}/${post.id}`}>
           <Item.Header className="ui header">{post.title}</Item.Header>
           <Item.Meta>
             <span>

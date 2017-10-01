@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchPost } from '../../actions/posts';
+import { Container, Header } from 'semantic-ui-react';
 
-const PostDetail = ({ match }) => {
-  const params = match.params;
-  console.log(params);
-  return (
-    <h1>
-      Post '{params.post_id}' of category '{params.category}' in future
-      versions.
-    </h1>
-  );
-};
+class PostDetail extends Component {
+  componentWillMount() {
+    this.props.getPostById(this.props.match.params.postId);
+  }
 
-export default PostDetail;
+  render() {
+    const post = this.props.post;
+
+    return (
+      <Container text style={{ marginTop: '7em' }}>
+        <Header as="h1">{post.title}</Header>
+        <p>{post.description}</p>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  post: state.activePost
+});
+
+const mapDispatchToProps = dispatch => ({
+  getPostById(id) {
+    dispatch(fetchPost(id));
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);

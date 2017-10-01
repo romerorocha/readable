@@ -14,7 +14,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <Container text style={{ marginTop: '7em' }} fluid>
         <Breadcrumb size="big">
           <Breadcrumb.Section>home</Breadcrumb.Section>
           <Breadcrumb.Divider icon="right chevron" />
