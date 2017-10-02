@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
-import CategoriesMenu from './CategoriesMenu';
-import HomeMenu from './HomeMenu';
 import { connect } from 'react-redux';
 import { fetchCategories } from '../../actions/categories';
+import CategoriesMenu from './CategoriesMenu';
+import HomeMenu from './HomeMenu';
+import { Menu, Icon } from 'semantic-ui-react';
 
 class MainMenu extends Component {
   componentWillMount() {
@@ -14,7 +14,7 @@ class MainMenu extends Component {
     const { categories, activeMenu } = this.props;
 
     return (
-      <Menu stackable icon="labeled" inverted color="black">
+      <Menu stackable icon="labeled" color="black" inverted>
         <HomeMenu activeMenu={activeMenu} />
         <CategoriesMenu categories={categories} activeMenu={activeMenu} />
         <Menu.Item position="right">

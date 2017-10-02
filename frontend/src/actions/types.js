@@ -9,6 +9,7 @@ export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES';
 export const VOTE_ON_POST = 'VOTE_ON_POST';
 export const RECEIVE_POST = 'RECEIVE_POST';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
+export const SELECT_POST = 'SELECT_POST';
 
 // Comments
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';

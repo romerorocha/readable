@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import activeMenu from './menu';
 import categories from './categories';
-import { posts, postsSorting, post } from './posts';
+import { posts, postsSorting } from './posts';
 import { comments } from './comments';
 
 export default combineReducers({
@@ -9,6 +9,5 @@ export default combineReducers({
   categories,
   posts,
   postsSorting,
-  post,
   comments
 });
