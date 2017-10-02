@@ -17,7 +17,7 @@ class PostDetail extends Component {
     const postDate = new Date(post.timestamp).toLocaleString();
 
     return (
-      <Container fluid style={{ marginTop: '7em' }}>
+      <Container>
         <Breadcrumbs category={post.category} post />
         <Divider />
         <Header as="h1">{post.title}</Header>

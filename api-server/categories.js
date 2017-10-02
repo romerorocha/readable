@@ -13,12 +13,12 @@ const defaultData = {
       {
         name: 'redux',
         path: 'redux',
-	icon: 'registered'
+	icon: 'translate'
       },
       {
         name: 'udacity',
         path: 'udacity',
-	icon: 'underline'      
+	icon: 'underline'
       }
   ]
 }

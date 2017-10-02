@@ -12,7 +12,7 @@ const App = ({ store }) => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Container>
+        <Container fluid>
           <MainMenu />
           <Route exact path="/" component={Home} />
           <Route exact path="/:category" component={Category} />
