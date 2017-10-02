@@ -1,6 +1,6 @@
 import { RECEIVE_COMMENTS } from '../actions/types';
 
-export const comments = (state = {}, action) => {
+const commentsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_COMMENTS:
       return action.comments.reduce((acc, value) => {
@@ -11,3 +11,5 @@ export const comments = (state = {}, action) => {
       return state;
   }
 };
+
+export default commentsReducer;

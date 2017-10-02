@@ -1,17 +1,11 @@
-import {
-  RECEIVE_POSTS,
-  SORT_POSTS_BY,
-  VOTE_ON_POST,
-  RECEIVE_POST
-} from '../actions/types';
-import { VOTE_SCORE } from '../util/Constants';
+import { RECEIVE_POSTS, VOTE_ON_POST, RECEIVE_POST } from '../actions/types';
 
 const initialState = {
   byId: {},
   selectedPost: {}
 };
 
-export const posts = (state = initialState, action) => {
+const postsReducer = (state = initialState, action) => {
   switch (action.type) {
     case RECEIVE_POSTS:
       return {
@@ -39,11 +33,4 @@ export const posts = (state = initialState, action) => {
   }
 };
 
-export const postsSorting = (state = VOTE_SCORE, action) => {
-  switch (action.type) {
-    case SORT_POSTS_BY:
-      return action.sorting;
-    default:
-      return state;
-  }
-};
+export default postsReducer;

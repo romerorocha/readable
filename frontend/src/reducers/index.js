@@ -1,13 +1,12 @@
 import { combineReducers } from 'redux';
-import activeMenu from './menu';
-import categories from './categories';
-import { posts, postsSorting } from './posts';
-import { comments } from './comments';
+import categoriesReducer from './categories';
+import uiReducer from './ui';
+import postsReducer from './posts';
+import commentsReducer from './comments';
 
 export default combineReducers({
-  activeMenu,
-  categories,
-  posts,
-  postsSorting,
-  comments
+  categories: categoriesReducer,
+  posts: postsReducer,
+  comments: commentsReducer,
+  ui: uiReducer
 });

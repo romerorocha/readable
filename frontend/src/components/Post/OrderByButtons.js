@@ -31,7 +31,7 @@ const OrderByButtons = ({ sortBy, sorting }) => {
 };
 
 const mapStateToProps = state => ({
-  sorting: state.postsSorting
+  sorting: state.ui.postsSorting
 });
 
 const mapDispatchToProps = dispatch => ({
