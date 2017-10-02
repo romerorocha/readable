@@ -5,11 +5,13 @@ const headers = {
   Authorization: 'auth'
 };
 
+// Categories
 export const getCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => data.categories);
 
+// Posts
 export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers }).then(res => res.json());
 
@@ -29,3 +31,7 @@ export const voteOnPost = (id, vote) =>
 
 export const getPost = id =>
   fetch(`${api}/posts/${id}`, { headers }).then(res => res.json());
+
+// Comments
+export const getComments = postId =>
+  fetch(`${api}/posts/${postId}/comments`, { headers }).then(res => res.json());

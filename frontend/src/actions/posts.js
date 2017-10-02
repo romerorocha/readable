@@ -1,19 +1,24 @@
 import * as ReadableApi from '../util/ReadableApi';
-import { GET_POSTS, SORT_POSTS_BY, VOTE_ON_POST, GET_POST } from './types';
+import {
+  RECEIVE_POSTS,
+  SORT_POSTS_BY,
+  VOTE_ON_POST,
+  RECEIVE_POST
+} from './types';
 
-export const getPosts = posts => ({
-  type: GET_POSTS,
+export const receivePosts = posts => ({
+  type: RECEIVE_POSTS,
   posts
 });
 
 export const fetchAllPosts = () => async dispatch => {
   const posts = await ReadableApi.getAllPosts();
-  return dispatch(getPosts(posts));
+  return dispatch(receivePosts(posts));
 };
 
 export const fetchPostsByCategory = category => async dispatch => {
   const posts = await ReadableApi.getPosts(category);
-  return dispatch(getPosts(posts));
+  return dispatch(receivePosts(posts));
 };
 
 export const sortPostsBy = sorting => ({
@@ -21,22 +26,22 @@ export const sortPostsBy = sorting => ({
   sorting
 });
 
-export const voteFor = post => ({
+export const vote = post => ({
   type: VOTE_ON_POST,
   post
 });
 
-export const voteOnPost = (id, vote) => async dispatch => {
-  const post = await ReadableApi.voteOnPost(id, vote);
-  return dispatch(voteFor(post));
+export const voteOnPost = (id, voteValue) => async dispatch => {
+  const post = await ReadableApi.voteOnPost(id, voteValue);
+  return dispatch(vote(post));
 };
 
-export const getPost = post => ({
-  type: GET_POST,
+export const receivePost = post => ({
+  type: RECEIVE_POST,
   post
 });
 
 export const fetchPost = postId => async dispatch => {
   const post = await ReadableApi.getPost(postId);
-  return dispatch(getPost(post));
+  return dispatch(receivePost(post));
 };

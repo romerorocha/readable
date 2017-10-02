@@ -1,8 +1,8 @@
-import { LOAD_CATEGORIES } from '../actions/types';
+import { RECEIVE_CATEGORIES } from '../actions/types';
 
 const categories = (state = [], action) => {
   switch (action.type) {
-    case LOAD_CATEGORIES:
+    case RECEIVE_CATEGORIES:
       return action.categories;
     default:
       return state;

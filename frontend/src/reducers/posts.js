@@ -1,8 +1,8 @@
 import {
-  GET_POSTS,
+  RECEIVE_POSTS,
   SORT_POSTS_BY,
   VOTE_ON_POST,
-  GET_POST
+  RECEIVE_POST
 } from '../actions/types';
 import { VOTE_SCORE } from '../util/Constants';
 
@@ -13,7 +13,7 @@ import { VOTE_SCORE } from '../util/Constants';
 */
 export const posts = (state = {}, action) => {
   switch (action.type) {
-    case GET_POSTS:
+    case RECEIVE_POSTS:
       return action.posts.reduce((acc, value) => {
         acc[value.id] = value;
         return acc;
@@ -37,9 +37,9 @@ export const postsSorting = (state = VOTE_SCORE, action) => {
   }
 };
 
-export const activePost = (state = {}, action) => {
+export const post = (state = {}, action) => {
   switch (action.type) {
-    case GET_POST:
+    case RECEIVE_POST:
       return action.post;
     default:
       return state;
