@@ -8,6 +8,5 @@ export const receiveComments = comments => ({
 
 export const fetchComments = postId => async dispatch => {
   const comments = await ReadableApi.getComments(postId);
-  console.log('passei aqui');
   return dispatch(receiveComments(comments));
 };

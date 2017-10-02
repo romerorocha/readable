@@ -11,14 +11,14 @@ class Category extends Component {
   componentWillMount() {
     const category = this.props.match.params.category;
     this.props.activate(category);
-    this.props.fetchPosts(category); //TODO verificar se precisa mesmo consultar os posts todas as vezes
+    this.props.fetchPosts(category);
   }
 
   componentWillReceiveProps(nextProps) {
     const category = nextProps.match.params.category;
     if (this.props.match.params.category !== category) {
       this.props.activate(category);
-      this.props.fetchPosts(category); //TODO verificar se precisa mesmo consultar os posts todas as vezes
+      this.props.fetchPosts(category);
     }
   }
 
