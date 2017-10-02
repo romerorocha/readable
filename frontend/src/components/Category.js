@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Container, Divider, Breadcrumb } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { activateMenu } from '../actions/menu';
 import { fetchPostsByCategory } from '../actions/posts';
 import SortedPosts from '../containers/SortedPosts';
 import Error404 from './Error404';
+import Breadcrumbs from './Breadcrumbs';
 
 class Category extends Component {
   componentWillMount() {
@@ -27,11 +28,7 @@ class Category extends Component {
 
     return (
       <Container fluid style={{ marginTop: '7em' }}>
-        <Breadcrumb size="big">
-          <Breadcrumb.Section>home</Breadcrumb.Section>
-          <Breadcrumb.Divider icon="right chevron" />
-          <Breadcrumb.Section active>{category}</Breadcrumb.Section>
-        </Breadcrumb>
+        <Breadcrumbs category={category} />
         <Divider />
         {categories.includes(category) ? <SortedPosts /> : <Error404 />}
       </Container>

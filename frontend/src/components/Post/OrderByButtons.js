@@ -16,17 +16,15 @@ const OrderByButtons = ({ sortBy, sorting }) => {
           name={VOTE_SCORE}
           onClick={handleSorting}
           active={sorting === VOTE_SCORE}
-        >
-          Sort by votes
-        </Button>
+          content="Sort by votes"
+        />
         <Button.Or />
         <Button
           name={TIMESTAMP}
           onClick={handleSorting}
           active={sorting === TIMESTAMP}
-        >
-          Sort by date
-        </Button>
+          content="Sort by date"
+        />
       </Button.Group>
     </Container>
   );

@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost } from '../../actions/posts';
 import { fetchComments } from '../../actions/comments';
-import {
-  Container,
-  Header,
-  Divider,
-  Breadcrumb,
-  Comment
-} from 'semantic-ui-react';
+import Breadcrumbs from '../Breadcrumbs';
+import { Container, Header, Divider, Comment, Icon } from 'semantic-ui-react';
 
 class PostDetail extends Component {
   componentWillMount() {
@@ -18,27 +13,29 @@ class PostDetail extends Component {
   }
 
   render() {
-    const post = this.props.post;
+    const { post, comments } = this.props;
+    const postDate = new Date(post.timestamp).toLocaleString();
 
     return (
       <Container fluid style={{ marginTop: '7em' }}>
-        <Breadcrumb size="big">
-          <Breadcrumb.Section>home</Breadcrumb.Section>
-          <Breadcrumb.Divider icon="right chevron" />
-          <Breadcrumb.Section active>{post.category}</Breadcrumb.Section>
-          <Breadcrumb.Divider icon="right chevron" />
-          <Breadcrumb.Section active>Post</Breadcrumb.Section>
-        </Breadcrumb>
+        <Breadcrumbs category={post.category} post />
         <Divider />
-        <Header>{post.title}</Header>
-        <p>{post.description}</p>
+        <Header as="h1">{post.title}</Header>
+        <p>
+          <Icon name="user" />
+          <strong>{post.author}</strong>
+        </p>
+        <p>
+          <Icon name="calendar" />
+          <strong>{postDate}</strong>
+        </p>
+        <p>{post.body}</p>
 
         <Header as="h3" dividing>
-          Comments
+          Comments ({comments.length})
         </Header>
-
         <Comment.Group>
-          {this.props.comments.map(comment => (
+          {comments.map(comment => (
             <Comment key={comment.id}>
               <Comment.Content>
                 <Comment.Author as="a">{comment.author}</Comment.Author>

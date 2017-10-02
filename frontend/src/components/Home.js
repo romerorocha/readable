@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Divider, Breadcrumb } from 'semantic-ui-react';
+import { Container, Divider } from 'semantic-ui-react';
 import { ALL_POSTS } from '../util/Constants';
 import { activateMenu } from '../actions/menu';
 import { fetchAllPosts } from '../actions/posts';
 import SortedPosts from '../containers/SortedPosts';
+import Breadcrumbs from './Breadcrumbs';
 
 class Home extends Component {
   componentWillMount() {
@@ -15,11 +16,7 @@ class Home extends Component {
   render() {
     return (
       <Container fluid style={{ marginTop: '7em' }}>
-        <Breadcrumb size="big">
-          <Breadcrumb.Section>home</Breadcrumb.Section>
-          <Breadcrumb.Divider icon="right chevron" />
-          <Breadcrumb.Section active>all posts</Breadcrumb.Section>
-        </Breadcrumb>
+        <Breadcrumbs category="all posts" />
         <Divider />
         <SortedPosts />
       </Container>
