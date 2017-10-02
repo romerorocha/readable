@@ -15,7 +15,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Container fluid style={{ marginTop: '7em' }}>
+      <Container>
         <Breadcrumbs category="all posts" />
         <Divider />
         <SortedPosts />

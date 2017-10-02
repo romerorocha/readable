@@ -32,7 +32,7 @@ class PostDetail extends Component {
     const { visible } = this.state;
 
     return (
-      <Container fluid style={{ marginTop: '7em' }}>
+      <Container>
         <Breadcrumbs category={post.category} post />
         <Divider />
         <Sidebar.Pushable as={Segment}>

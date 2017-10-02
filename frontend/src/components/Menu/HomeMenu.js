@@ -7,7 +7,7 @@ const HomeMenu = ({ activeMenu }) => {
   return (
     <Link to="/">
       <Menu.Item name={ALL_POSTS} active={activeMenu === ALL_POSTS}>
-        <Icon name="home" />
+        <Icon name="registered" />
         Readable
       </Menu.Item>
     </Link>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import CategoriesMenu from './CategoriesMenu';
 import HomeMenu from './HomeMenu';
 import { connect } from 'react-redux';
@@ -14,9 +14,13 @@ class MainMenu extends Component {
     const { categories, activeMenu } = this.props;
 
     return (
-      <Menu fixed="top" icon="labeled" inverted color="black">
+      <Menu stackable icon="labeled" inverted color="black">
         <HomeMenu activeMenu={activeMenu} />
         <CategoriesMenu categories={categories} activeMenu={activeMenu} />
+        <Menu.Item position="right">
+          <Icon name="newspaper" />
+          New Post
+        </Menu.Item>
       </Menu>
     );
   }

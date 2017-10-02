@@ -27,7 +27,7 @@ class Category extends Component {
     const { categories } = this.props;
 
     return (
-      <Container fluid style={{ marginTop: '7em' }}>
+      <Container>
         <Breadcrumbs category={category} />
         <Divider />
         {categories.includes(category) ? <SortedPosts /> : <Error404 />}
