@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchPost, receiveSelectedPost } from '../../actions/posts';
 import { fetchComments, voteOnComment } from '../../actions/comments';
 import Breadcrumbs from '../Breadcrumbs';
-import Comments from './Comments';
+import Comments from '../Comments/Comments';
 import PostSidebar from './PostSidebar';
 import PostContent from './PostContent';
 import { Container, Divider, Sidebar } from 'semantic-ui-react';
@@ -38,7 +38,11 @@ class PostDetail extends Component {
             <PostContent post={post} />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-        <Comments comments={comments} voteAction={this.handleVote} />
+        <Comments
+          comments={comments}
+          postId={post.id}
+          voteAction={this.handleVote}
+        />
       </Container>
     ) : (
       false

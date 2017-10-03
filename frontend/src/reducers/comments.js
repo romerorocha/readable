@@ -1,4 +1,8 @@
-import { RECEIVE_COMMENTS, VOTE_ON_COMMENT } from '../actions/types';
+import {
+  RECEIVE_COMMENTS,
+  VOTE_ON_COMMENT,
+  ADD_COMMENT
+} from '../actions/types';
 
 const commentsReducer = (state = {}, action) => {
   switch (action.type) {
@@ -8,6 +12,11 @@ const commentsReducer = (state = {}, action) => {
         return acc;
       }, {});
     case VOTE_ON_COMMENT:
+      return {
+        ...state,
+        [action.comment.id]: action.comment
+      };
+    case ADD_COMMENT:
       return {
         ...state,
         [action.comment.id]: action.comment

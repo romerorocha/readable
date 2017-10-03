@@ -1,12 +1,14 @@
 import React from 'react';
+import AddForm from './AddForm';
 import { Comment, Header, Icon } from 'semantic-ui-react';
 
-const Comments = ({ comments, voteAction }) => {
+const Comments = ({ comments, postId, voteAction }) => {
   return [
     <Header key="0" as="h3" dividing>
       Comments ({comments.length})
     </Header>,
-    <Comment.Group key="1">
+    <AddForm key="1" postId={postId} />,
+    <Comment.Group key="2">
       {comments.map(comment => {
         return (
           <Comment key={comment.id}>
