@@ -1,124 +1,56 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost, receiveSelectedPost } from '../../actions/posts';
-import { fetchComments } from '../../actions/comments';
+import { fetchComments, voteOnComment } from '../../actions/comments';
 import Breadcrumbs from '../Breadcrumbs';
-import {
-  Container,
-  Header,
-  Divider,
-  Comment,
-  Icon,
-  Sidebar,
-  Menu,
-  Segment,
-  Button
-} from 'semantic-ui-react';
+import Comments from './Comments';
+import PostSidebar from './PostSidebar';
+import PostContent from './PostContent';
+import { Container, Divider, Sidebar } from 'semantic-ui-react';
 
 class PostDetail extends Component {
-  state = { visible: false };
-
   componentWillMount() {
     const postId = this.props.match.params.postId;
-
-    if (Object.keys(this.props.posts.byId).length === 0) {
-      this.props.loadPost(postId);
-    }
-
-    this.props.setSelectedPost(postId);
+    this.loadPostsIfNeeded(postId);
     this.props.loadComments(postId);
   }
 
-  toggleVisibility = () => this.setState({ visible: !this.state.visible });
+  loadPostsIfNeeded = id => {
+    if (Object.keys(this.props.posts.byId).length === 0) {
+      this.props.loadPost(id);
+    }
+  };
+
+  handleVote = (id, vote) => {
+    this.props.voteAction(id, vote);
+  };
 
   render() {
-    const { visible } = this.state;
     const { post, comments } = this.props;
 
-    if (!post) {
-      return false;
-    }
-
-    const postDate = new Date(post.timestamp).toLocaleString();
-
-    return (
+    return post ? (
       <Container>
         <Breadcrumbs category={post.category} post />
         <Divider />
-        <Sidebar.Pushable as={Segment}>
-          <Button.Group floated="right">
-            <Button basic icon="thumbs up" />
-            <Button.Or
-              text={
-                post.voteScore > 0 ? '+'.concat(post.voteScore) : post.voteScore
-              }
-            />/>
-            <Button basic icon="thumbs down" />
-            <Button basic onClick={this.toggleVisibility} icon="setting" />
-          </Button.Group>
-          <Sidebar
-            as={Menu}
-            animation="overlay"
-            width="thin"
-            direction="top"
-            visible={visible}
-            inverted
-          >
-            <Menu.Menu position="right">
-              <Menu.Item icon="write" name="Edit" />
-              <Menu.Item icon="trash" name="Delete" />
-              <Menu.Item icon="close" onClick={this.toggleVisibility} />
-            </Menu.Menu>
-          </Sidebar>
+        <Sidebar.Pushable>
+          <PostSidebar post={post} />
           <Sidebar.Pusher>
-            <Segment basic>
-              <Header as="h1">{post.title}</Header>
-              <p>
-                <Icon name="user" />
-                <strong>{post.author}</strong>
-              </p>
-              <p>
-                <Icon name="calendar" />
-                <strong>{postDate}</strong>
-              </p>
-              <p>{post.body}</p>
-            </Segment>
+            <PostContent post={post} />
           </Sidebar.Pusher>
         </Sidebar.Pushable>
-
-        <Segment>
-          <Header as="h3" dividing>
-            Comments ({comments.length})
-          </Header>
-          <Comment.Group>
-            {comments.map(comment => (
-              <Comment key={comment.id}>
-                <Comment.Content>
-                  <Comment.Author as="a">{comment.author}</Comment.Author>
-                  <Comment.Metadata>
-                    <div>Today at 5:42PM</div>
-                  </Comment.Metadata>
-                  <Comment.Text>How artistic!</Comment.Text>
-                  <Comment.Actions>
-                    <Comment.Action>Reply</Comment.Action>
-                  </Comment.Actions>
-                </Comment.Content>
-              </Comment>
-            ))}
-          </Comment.Group>
-        </Segment>
+        <Comments comments={comments} voteAction={this.handleVote} />
       </Container>
+    ) : (
+      false
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    post: state.posts.byId[ownProps.match.params.postId],
-    posts: state.posts,
-    comments: Object.keys(state.comments).map(key => state.comments[key])
-  };
-};
+const mapStateToProps = (state, ownProps) => ({
+  post: state.posts.byId[ownProps.match.params.postId],
+  posts: state.posts,
+  comments: Object.keys(state.comments).map(key => state.comments[key])
+});
 
 const mapDispatchToProps = dispatch => ({
   loadPost(id) {
@@ -129,6 +61,9 @@ const mapDispatchToProps = dispatch => ({
   },
   loadComments(postId) {
     dispatch(fetchComments(postId));
+  },
+  voteAction: (id, vote) => {
+    dispatch(voteOnComment(id, vote));
   }
 });
 

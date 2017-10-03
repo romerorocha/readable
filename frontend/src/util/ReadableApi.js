@@ -35,3 +35,13 @@ export const getPost = id =>
 // Comments
 export const getComments = postId =>
   fetch(`${api}/posts/${postId}/comments`, { headers }).then(res => res.json());
+
+export const voteOnComment = (id, vote) =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option: vote })
+  }).then(res => res.json());
