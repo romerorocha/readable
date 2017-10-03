@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Modal, Form, Button } from 'semantic-ui-react';
+import { connect } from 'react-redux';
 import UUID from 'uuid/v1';
+import { addComment } from '../../actions/comments';
+import { Modal, Form, Button } from 'semantic-ui-react';
 
 class AddForm extends Component {
   state = {
@@ -14,16 +16,19 @@ class AddForm extends Component {
   handleSubmit = () => {
     const { author, body } = this.state;
 
-    let comment = {};
+    if (author === '' || body === '') {
+      return;
+    }
+
+    const comment = {};
     comment.id = UUID();
     comment.timestamp = Date.now();
     comment.parentId = this.props.postId;
     comment.author = author;
     comment.body = body;
 
+    this.props.saveComment(comment);
     this.close();
-
-    console.log(comment);
   };
 
   createComment = () => {};
@@ -44,12 +49,14 @@ class AddForm extends Component {
         <Modal.Content>
           <Form>
             <Form.Input
+              required
               placeholder="Name"
               name="author"
               value={author}
               onChange={this.handleChange}
             />
             <Form.TextArea
+              required
               placeholder="Comment"
               name="body"
               value={body}
@@ -74,4 +81,10 @@ class AddForm extends Component {
   }
 }
 
-export default AddForm;
+const mapDispatchToProps = dispatch => ({
+  saveComment(comment) {
+    dispatch(addComment(comment));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(AddForm);
