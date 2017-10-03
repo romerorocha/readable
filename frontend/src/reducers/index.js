@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import categoriesReducer from './categories';
-import uiReducer from './ui';
+import uiReducer from './UI';
 import postsReducer from './posts';
 import commentsReducer from './comments';
 

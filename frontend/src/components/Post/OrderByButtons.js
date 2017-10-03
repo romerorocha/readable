@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { sortPostsBy } from '../../actions/posts';
+import { sortPostsBy } from '../../actions/UI';
 import { TIMESTAMP, VOTE_SCORE } from '../../util/Constants';
 import { Button, Container } from 'semantic-ui-react';
 

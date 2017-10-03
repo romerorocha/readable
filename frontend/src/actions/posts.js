@@ -1,11 +1,12 @@
 import * as ReadableApi from '../util/ReadableApi';
 import {
   RECEIVE_POSTS,
-  SORT_POSTS_BY,
   VOTE_ON_POST,
-  RECEIVE_POST
+  RECEIVE_POST,
+  RECEIVE_SELECTED_POST
 } from './types';
 
+// Load all posts / by category
 export const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
@@ -21,11 +22,7 @@ export const fetchPostsByCategory = category => async dispatch => {
   return dispatch(receivePosts(posts));
 };
 
-export const sortPostsBy = sorting => ({
-  type: SORT_POSTS_BY,
-  sorting
-});
-
+// Vote
 export const vote = post => ({
   type: VOTE_ON_POST,
   post
@@ -36,6 +33,13 @@ export const voteOnPost = (id, voteValue) => async dispatch => {
   return dispatch(vote(post));
 };
 
+// Set selected post on UI
+export const receiveSelectedPost = id => ({
+  type: RECEIVE_SELECTED_POST,
+  id
+});
+
+// Load single post
 export const receivePost = post => ({
   type: RECEIVE_POST,
   post

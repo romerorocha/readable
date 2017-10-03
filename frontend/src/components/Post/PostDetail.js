@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost, receivePost } from '../../actions/posts';
+import { fetchPost, receiveSelectedPost } from '../../actions/posts';
 import { fetchComments } from '../../actions/comments';
 import Breadcrumbs from '../Breadcrumbs';
 import {
@@ -20,16 +20,26 @@ class PostDetail extends Component {
 
   componentWillMount() {
     const postId = this.props.match.params.postId;
-    this.props.getPostById(postId);
-    this.props.getComments(postId);
+
+    if (Object.keys(this.props.posts.byId).length === 0) {
+      this.props.loadPost(postId);
+    }
+
+    this.props.setSelectedPost(postId);
+    this.props.loadComments(postId);
   }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible });
 
   render() {
-    const { post, comments } = this.props;
-    const postDate = new Date(post.timestamp).toLocaleString();
     const { visible } = this.state;
+    const { post, comments } = this.props;
+
+    if (!post) {
+      return false;
+    }
+
+    const postDate = new Date(post.timestamp).toLocaleString();
 
     return (
       <Container>
@@ -57,7 +67,7 @@ class PostDetail extends Component {
             <Menu.Menu position="right">
               <Menu.Item icon="write" name="Edit" />
               <Menu.Item icon="trash" name="Delete" />
-              <Menu.Item icon="arrow up" onClick={this.toggleVisibility} />
+              <Menu.Item icon="close" onClick={this.toggleVisibility} />
             </Menu.Menu>
           </Sidebar>
           <Sidebar.Pusher>
@@ -102,17 +112,22 @@ class PostDetail extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  post: state.post,
-  comments: Object.keys(state.comments).map(key => state.comments[key])
-});
+const mapStateToProps = (state, ownProps) => {
+  return {
+    post: state.posts.byId[ownProps.match.params.postId],
+    posts: state.posts,
+    comments: Object.keys(state.comments).map(key => state.comments[key])
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
-  getPostById(id) {
+  loadPost(id) {
     dispatch(fetchPost(id));
   },
-  getComments(postId) {
-    dispatch(receivePost({}));
+  setSelectedPost(id) {
+    dispatch(receiveSelectedPost(id));
+  },
+  loadComments(postId) {
     dispatch(fetchComments(postId));
   }
 });

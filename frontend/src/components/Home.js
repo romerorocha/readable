@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Divider } from 'semantic-ui-react';
 import { ALL_POSTS } from '../util/Constants';
-import { activateMenu } from '../actions/menu';
+import { activateMenu } from '../actions/UI';
 import { fetchAllPosts } from '../actions/posts';
 import SortedPosts from '../containers/SortedPosts';
 import Breadcrumbs from './Breadcrumbs';

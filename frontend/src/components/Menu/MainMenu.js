@@ -29,7 +29,7 @@ class MainMenu extends Component {
 const mapStateToProps = state => {
   return {
     categories: state.categories,
-    activeMenu: state.activeMenu
+    activeMenu: state.ui.activeMenu
   };
 };
 
