@@ -1,13 +1,7 @@
-import {
-  RECEIVE_SELECTED_POST,
-  RECEIVE_POSTS,
-  RECEIVE_POST,
-  VOTE_ON_POST
-} from '../actions/types';
+import { RECEIVE_POSTS, RECEIVE_POST, VOTE_ON_POST } from '../actions/types';
 
 const initialState = {
-  byId: {},
-  selectedPost: ''
+  byId: {}
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -27,11 +21,6 @@ const postsReducer = (state = initialState, action) => {
           ...state.byId,
           [action.post.id]: action.post
         }
-      };
-    case RECEIVE_SELECTED_POST:
-      return {
-        ...state,
-        selectedPost: action.id
       };
     case RECEIVE_POST:
       return {
