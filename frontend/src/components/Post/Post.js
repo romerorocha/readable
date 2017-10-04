@@ -1,7 +1,7 @@
 import React from 'react';
 import { Item } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import VoteButtons from './VoteButtons';
+import ActionButtons from './ActionButtons';
 
 const Post = ({ post, voteAction }) => {
   const postDate = new Date(post.timestamp).toLocaleString();
@@ -27,7 +27,7 @@ const Post = ({ post, voteAction }) => {
         </Link>
         <Item.Description>{post.body}</Item.Description>
         <Item.Extra>
-          <VoteButtons voteScore={post.voteScore} voteAction={handleVote} />
+          <ActionButtons voteScore={post.voteScore} voteAction={handleVote} />
         </Item.Extra>
       </Item.Content>
     </Item>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'semantic-ui-react';
 
-const VoteButtons = ({ voteScore, voteAction }) => {
+const ActionButtons = ({ voteScore, voteAction }) => {
   return (
     <Button.Group basic floated="right">
       <Button icon="thumbs up" onClick={() => voteAction('upVote')} circular />
@@ -17,4 +17,4 @@ const VoteButtons = ({ voteScore, voteAction }) => {
   );
 };
 
-export default VoteButtons;
+export default ActionButtons;

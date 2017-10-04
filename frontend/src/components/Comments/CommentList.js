@@ -4,8 +4,8 @@ import { Comment, Icon } from 'semantic-ui-react';
 const CommentList = ({ comments, voteAction }) => {
   return (
     <Comment.Group>
-      {comments.map(comment => {
-        return (
+      {comments &&
+        comments.map(comment => (
           <Comment key={comment.id}>
             <Comment.Content>
               <Comment.Author as="a">{comment.author}</Comment.Author>
@@ -33,8 +33,7 @@ const CommentList = ({ comments, voteAction }) => {
               </Comment.Actions>
             </Comment.Content>
           </Comment>
-        );
-      })}
+        ))}
     </Comment.Group>
   );
 };
