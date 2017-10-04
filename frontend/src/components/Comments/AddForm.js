@@ -12,14 +12,14 @@ class AddForm extends Component {
   handleSubmit = () => {
     const { author, body } = this.state;
     const { save, close } = this.props;
+    const emptyFields = author === '' || body === '';
 
-    if (author === '' || body === '') {
-      this.setState({ emptyFields: true });
-      return;
+    this.setState({ emptyFields });
+
+    if (!emptyFields) {
+      save(author, body);
+      close();
     }
-
-    save(author, body);
-    close();
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
