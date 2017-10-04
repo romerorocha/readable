@@ -1,5 +1,5 @@
 import React from 'react';
-import AddForm from './AddForm';
+import AddComment from './AddComment';
 import { Comment, Header, Icon } from 'semantic-ui-react';
 
 const Comments = ({ comments, postId, voteAction }) => {
@@ -7,7 +7,7 @@ const Comments = ({ comments, postId, voteAction }) => {
     <Header key="0" as="h3" dividing>
       Comments ({comments.length})
     </Header>,
-    <AddForm key="1" postId={postId} />,
+    <AddComment key="1" postId={postId} />,
     <Comment.Group key="2">
       {comments.map(comment => {
         return (
