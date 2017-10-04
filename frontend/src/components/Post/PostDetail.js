@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost, receiveSelectedPost } from '../../actions/posts';
+import { fetchPost, voteOnPost } from '../../actions/posts';
 import { fetchComments, voteOnComment } from '../../actions/comments';
 import Breadcrumbs from '../Breadcrumbs';
 import Comments from '../Comments/Comments';
-import PostSidebar from './PostSidebar';
 import PostContent from './PostContent';
-import { Container, Divider, Sidebar } from 'semantic-ui-react';
+import VoteButtons from './VoteButtons';
+import { Container, Divider } from 'semantic-ui-react';
 
 class PostDetail extends Component {
   componentWillMount() {
@@ -21,27 +21,19 @@ class PostDetail extends Component {
     }
   };
 
-  handleVote = (id, vote) => {
-    this.props.voteAction(id, vote);
-  };
-
   render() {
-    const { post, comments } = this.props;
+    const { post, comments, votePost, voteComment } = this.props;
 
     return post ? (
       <Container>
         <Breadcrumbs category={post.category} post />
         <Divider />
-        <Sidebar.Pushable>
-          <PostSidebar post={post} />
-          <Sidebar.Pusher>
-            <PostContent post={post} />
-          </Sidebar.Pusher>
-        </Sidebar.Pushable>
+        <VoteButtons key="0" voteAction={votePost} voteScore={post.voteScore} />
+        <PostContent post={post} />
         <Comments
           comments={comments}
           postId={post.id}
-          voteAction={this.handleVote}
+          voteAction={voteComment}
         />
       </Container>
     ) : (
@@ -56,17 +48,17 @@ const mapStateToProps = (state, ownProps) => ({
   comments: Object.keys(state.comments).map(key => state.comments[key])
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   loadPost(id) {
     dispatch(fetchPost(id));
   },
-  setSelectedPost(id) {
-    dispatch(receiveSelectedPost(id));
+  votePost(vote) {
+    dispatch(voteOnPost(ownProps.match.params.postId, vote));
   },
   loadComments(postId) {
     dispatch(fetchComments(postId));
   },
-  voteAction: (id, vote) => {
+  voteComment(id, vote) {
     dispatch(voteOnComment(id, vote));
   }
 });

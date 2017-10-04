@@ -11,6 +11,8 @@ const VoteButtons = ({ voteScore, voteAction }) => {
         onClick={() => voteAction('downVote')}
         circular
       />
+      <Button icon="write" />
+      <Button icon="trash" />
     </Button.Group>
   );
 };
