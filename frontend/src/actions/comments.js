@@ -3,9 +3,11 @@ import {
   RECEIVE_COMMENTS,
   VOTE_ON_COMMENT,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  UPDATE_COMMENT
 } from './types';
 
+//Get All
 export const receiveComments = (comments, parentId) => ({
   type: RECEIVE_COMMENTS,
   parentId,
@@ -39,7 +41,7 @@ export const addComment = comment => async dispatch => {
   return dispatch(add(newComment));
 };
 
-// remove
+// Remove
 export const remove = comment => ({
   type: REMOVE_COMMENT,
   comment
@@ -48,4 +50,15 @@ export const remove = comment => ({
 export const removeComment = id => async dispatch => {
   const deletedComment = await ReadableApi.deleteComment(id);
   return dispatch(remove(deletedComment));
+};
+
+// update a comment
+export const update = comment => ({
+  type: UPDATE_COMMENT,
+  comment
+});
+
+export const updateComment = (id, body) => async dispatch => {
+  const comment = await ReadableApi.updateComment(id, body);
+  return dispatch(update(comment));
 };

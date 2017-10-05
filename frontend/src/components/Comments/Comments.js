@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import AddModal from './AddModal';
 import { Header } from 'semantic-ui-react';
 import CommentList from './CommentList';
 import { connect } from 'react-redux';
-import {
-  fetchComments,
-  voteOnComment,
-  removeComment
-} from '../../actions/comments';
+import { fetchComments } from '../../actions/comments';
 
 class Comments extends Component {
   componentDidMount() {
@@ -15,18 +10,12 @@ class Comments extends Component {
   }
 
   render() {
-    const { postId, comments, voteComment, deleteComment } = this.props;
+    const { postId, comments } = this.props;
     return [
       <Header key="0" as="h3" dividing>
         Comments ({comments.length})
       </Header>,
-      <AddModal key="1" postId={postId} />,
-      <CommentList
-        key="2"
-        comments={comments}
-        voteAction={voteComment}
-        deleteAction={deleteComment}
-      />
+      <CommentList key="1" postId={postId} comments={comments} />
     ];
   }
 }
@@ -38,12 +27,6 @@ const mapStateToProps = (state, ownProps) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadComments() {
     dispatch(fetchComments(ownProps.postId));
-  },
-  voteComment(id, vote) {
-    dispatch(voteOnComment(id, vote));
-  },
-  deleteComment(id) {
-    dispatch(removeComment(id));
   }
 });
 

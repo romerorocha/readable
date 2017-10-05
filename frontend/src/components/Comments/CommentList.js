@@ -1,44 +1,121 @@
-import React from 'react';
-import { Comment, Icon } from 'semantic-ui-react';
+import React, { Component } from 'react';
+import { Comment, Button, Modal } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import UUID from 'uuid/v1';
+import CommentItem from './CommentItem';
+import CommentForm from './CommentForm';
+import ModalActions from './ModalActions';
+import {
+  addComment,
+  updateComment,
+  voteOnComment,
+  removeComment
+} from '../../actions/comments';
 
-const CommentList = ({ comments, voteAction, deleteAction }) => {
-  return (
-    <Comment.Group>
-      {comments &&
-        comments.map(comment => (
-          <Comment key={comment.id}>
-            <Comment.Content>
-              <Comment.Author as="a">{comment.author}</Comment.Author>
-              <Comment.Metadata>
-                {new Date(comment.timestamp).toLocaleString()}
-              </Comment.Metadata>
-              <Comment.Metadata>
-                <Icon
-                  name={comment.voteScore < 0 ? 'thumbs down' : 'thumbs up'}
-                />
-              </Comment.Metadata>
-              <Comment.Metadata>{comment.voteScore}</Comment.Metadata>
-              <Comment.Text>{comment.body}</Comment.Text>
-              <Comment.Actions>
-                <Comment.Action
-                  onClick={() => voteAction(comment.id, 'upVote')}
-                >
-                  Like
-                </Comment.Action>
-                <Comment.Action
-                  onClick={() => voteAction(comment.id, 'downVote')}
-                >
-                  Dislike
-                </Comment.Action>
-                <Comment.Action onClick={() => deleteAction(comment.id)}>
-                  Delete
-                </Comment.Action>
-              </Comment.Actions>
-            </Comment.Content>
-          </Comment>
-        ))}
-    </Comment.Group>
-  );
-};
+class CommentList extends Component {
+  state = {
+    open: false,
+    emptyFields: false,
+    id: '',
+    body: '',
+    author: ''
+  };
 
-export default CommentList;
+  render() {
+    const { comments, vote, remove } = this.props;
+    const { open, emptyFields, body, author, id } = this.state;
+
+    return [
+      <Button key="0" content="Add Comment" onClick={() => this.show()} />,
+      <Modal key="1" dimmer open={open} onClose={this.close}>
+        <Modal.Header>Enter your comment:</Modal.Header>
+        <Modal.Content key="0">
+          <CommentForm
+            emptyFields={emptyFields}
+            changeAction={this.handleChange}
+            id={id}
+            body={body}
+            author={author}
+          />
+        </Modal.Content>,
+        <ModalActions submit={this.handleSubmit} close={this.close} />
+      </Modal>,
+      <Comment.Group key="2">
+        {comments &&
+          comments.map(comment => (
+            <CommentItem
+              key={comment.id}
+              comment={comment}
+              voteAction={vote}
+              removeAction={remove}
+              editAction={this.handleEditing}
+            />
+          ))}
+      </Comment.Group>
+    ];
+  }
+
+  handleSubmit = () => {
+    const { id, author, body } = this.state;
+
+    if (author === '' || body === '') {
+      this.setState({ emptyFields: true });
+    } else {
+      this.saveComment(id, author, body);
+    }
+  };
+
+  saveComment = (id, author, body) => {
+    const { add, update } = this.props;
+
+    if (id !== '') {
+      update(id, body);
+    } else {
+      add(author, body);
+    }
+    this.close();
+  };
+
+  handleEditing = comment => {
+    const { id, author, body } = comment;
+    this.setState({ id, author, body });
+    this.show();
+  };
+
+  handleChange = (e, { name, value }) => this.setState({ [name]: value });
+
+  show = () => this.setState({ open: true });
+
+  close = () =>
+    this.setState({
+      open: false,
+      emptyFields: false,
+      id: '',
+      author: '',
+      body: ''
+    });
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  add(body, author) {
+    const comment = {
+      id: UUID(),
+      timestamp: Date.now(),
+      parentId: ownProps.postId,
+      author,
+      body
+    };
+    dispatch(addComment(comment));
+  },
+  update(id, body) {
+    dispatch(updateComment(id, body));
+  },
+  vote(id, vote) {
+    dispatch(voteOnComment(id, vote));
+  },
+  remove(id) {
+    dispatch(removeComment(id));
+  }
+});
+
+export default connect(null, mapDispatchToProps)(CommentList);

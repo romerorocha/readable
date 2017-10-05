@@ -6,7 +6,7 @@ const PostContent = ({ post }) => {
 
   return (
     <Container fluid>
-      <Header as="h1">{post.title}</Header>
+      <Header as="h2">{post.title}</Header>
       <p>
         <Icon name="user" />
         <strong>{post.author}</strong>

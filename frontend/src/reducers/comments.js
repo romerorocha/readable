@@ -2,10 +2,11 @@ import {
   RECEIVE_COMMENTS,
   VOTE_ON_COMMENT,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  UPDATE_COMMENT
 } from '../actions/types';
 
-const commentsReducer = (state = {}, action) => {
+export const commentsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_COMMENTS:
       if (action.comments.length === 0) {
@@ -41,6 +42,14 @@ const commentsReducer = (state = {}, action) => {
       delete state[action.comment.parentId][action.comment.id];
       return {
         ...state
+      };
+    case UPDATE_COMMENT:
+      return {
+        ...state,
+        [action.comment.parentId]: {
+          ...state[action.comment.parentId],
+          [action.comment.id]: action.comment
+        }
       };
     default:
       return state;
