@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Modal, Message } from 'semantic-ui-react';
+import { EMPTY } from '../../util/Constants';
 
 const ModalForm = ({ emptyFields, id, author, body, changeAction }) => {
   return [
@@ -14,7 +15,7 @@ const ModalForm = ({ emptyFields, id, author, body, changeAction }) => {
           placeholder="Name"
           name="author"
           value={author}
-          disabled={id !== ''}
+          disabled={id !== EMPTY}
           onChange={changeAction}
         />
         <Form.TextArea

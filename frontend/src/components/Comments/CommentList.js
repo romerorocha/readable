@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import { Comment, Button, Modal } from 'semantic-ui-react';
+import { Header, Comment, Button, Modal } from 'semantic-ui-react';
 import CommentItem from './CommentItem';
 import ModalForm from './ModalForm';
 import ModalActions from './ModalActions';
+import { EMPTY } from '../../util/Constants';
 
 class CommentList extends Component {
   state = {
     open: false,
     emptyFields: false,
-    id: '',
-    body: '',
-    author: ''
+    id: EMPTY,
+    body: EMPTY,
+    author: EMPTY
   };
+
+  componentDidMount() {
+    this.props.loadComments();
+  }
 
   render() {
     const { comments, vote, remove } = this.props;
     const { open, emptyFields, body, author, id } = this.state;
 
     return [
-      <Button key="0" content="Add Comment" onClick={() => this.show()} />,
-      <Modal key="1" dimmer open={open} onClose={this.close}>
+      <Header key="0" as="h3" dividing>
+        Comments ({comments.length})
+      </Header>,
+      <Button key="1" content="Add Comment" onClick={() => this.show()} />,
+      <Modal key="2" dimmer open={open} onClose={this.close}>
         <ModalForm
           emptyFields={emptyFields}
           changeAction={this.handleChange}
@@ -29,7 +37,7 @@ class CommentList extends Component {
         />
         <ModalActions submit={this.handleSubmit} close={this.close} />
       </Modal>,
-      <Comment.Group key="2">
+      <Comment.Group key="3">
         {comments &&
           comments.map(comment => (
             <CommentItem
@@ -46,21 +54,12 @@ class CommentList extends Component {
 
   handleSubmit = () => {
     const { id, author, body } = this.state;
-
-    if (author === '' || body === '') {
+    if (author === EMPTY || body === EMPTY) {
       this.setState({ emptyFields: true });
     } else {
-      this.saveComment(id, author, body);
+      this.props.save(id, author, body);
+      this.close();
     }
-  };
-
-  saveComment = (id, author, body) => {
-    if (id !== '') {
-      this.props.update(id, body);
-    } else {
-      this.props.addNew(author, body);
-    }
-    this.close();
   };
 
   handleEditing = comment => {
@@ -77,9 +76,9 @@ class CommentList extends Component {
     this.setState({
       open: false,
       emptyFields: false,
-      id: '',
-      author: '',
-      body: ''
+      id: EMPTY,
+      author: EMPTY,
+      body: EMPTY
     });
 }
 

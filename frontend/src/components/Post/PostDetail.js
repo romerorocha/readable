@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost, voteOnPost } from '../../actions/posts';
 import Breadcrumbs from '../Breadcrumbs';
-import CommentsSection from '../Comments/CommentsSection';
+import SortedComments from '../../containers/SortedComments';
 import PostContent from './PostContent';
 import ActionButtons from './ActionButtons';
 import { Container, Divider } from 'semantic-ui-react';
@@ -32,7 +32,7 @@ class PostDetail extends Component {
           voteScore={post.voteScore}
         />
         <PostContent post={post} />
-        <CommentsSection postId={post.id} />
+        <SortedComments postId={post.id} />
       </Container>
     ) : (
       false
