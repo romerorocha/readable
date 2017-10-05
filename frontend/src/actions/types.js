@@ -14,3 +14,4 @@ export const VOTE_ON_POST = 'VOTE_ON_POST';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS';
 export const VOTE_ON_COMMENT = 'VOTE_ON_COMMENT';
+export const REMOVE_COMMENT = 'REMOVE_COMMENT';

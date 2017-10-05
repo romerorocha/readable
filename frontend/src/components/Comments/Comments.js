@@ -3,30 +3,36 @@ import AddModal from './AddModal';
 import { Header } from 'semantic-ui-react';
 import CommentList from './CommentList';
 import { connect } from 'react-redux';
-import { fetchComments, voteOnComment } from '../../actions/comments';
+import {
+  fetchComments,
+  voteOnComment,
+  removeComment
+} from '../../actions/comments';
 
 class Comments extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadComments();
   }
 
   render() {
-    const { postId, comments, voteComment } = this.props;
+    const { postId, comments, voteComment, deleteComment } = this.props;
     return [
       <Header key="0" as="h3" dividing>
         Comments ({comments.length})
       </Header>,
       <AddModal key="1" postId={postId} />,
-      <CommentList key="2" comments={comments} voteAction={voteComment} />
+      <CommentList
+        key="2"
+        comments={comments}
+        voteAction={voteComment}
+        deleteAction={deleteComment}
+      />
     ];
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  comments: getSortedComments(
-    Object.keys(state.comments.byId).map(key => state.comments.byId[key]),
-    ownProps.postId
-  )
+  comments: getSortedComments(state.comments, ownProps.postId)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -35,13 +41,19 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
   voteComment(id, vote) {
     dispatch(voteOnComment(id, vote));
+  },
+  deleteComment(id) {
+    dispatch(removeComment(id));
   }
 });
 
 const getSortedComments = (comments, postId) => {
-  return comments
-    .filter(comment => comment.parentId === postId)
-    .sort((a, b) => b.voteScore - a.voteScore);
+  const postWithComments = comments[postId];
+  return postWithComments
+    ? Object.keys(postWithComments)
+        .map(key => postWithComments[key])
+        .sort((a, b) => b.voteScore - a.voteScore)
+    : [];
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);

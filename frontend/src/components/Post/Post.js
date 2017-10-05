@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { fetchComments } from '../../actions/comments';
 import { Link } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
-import { Item } from 'semantic-ui-react';
+import { Item, Icon } from 'semantic-ui-react';
 
 class Post extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadComments();
   }
 
@@ -18,6 +18,7 @@ class Post extends Component {
   render() {
     const { post, comments } = this.props;
     const postDate = new Date(post.timestamp).toLocaleString();
+
     return (
       <Item>
         <Item.Image
@@ -34,7 +35,12 @@ class Post extends Component {
             </Item.Meta>
             <Item.Meta>
               <span>
-                <strong>{comments.length} comments.</strong>
+                <strong>
+                  {comments.length} comments{' '}
+                  {comments.length >= 5 ? (
+                    <Icon name="fire" color="red" />
+                  ) : null}
+                </strong>
               </span>
             </Item.Meta>
           </Link>
@@ -51,11 +57,18 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  comments: Object.keys(state.comments.byId)
-    .map(key => state.comments.byId[key])
-    .filter(comment => comment.parentId === ownProps.post.id)
-});
+const mapStateToProps = (state, ownProps) => {
+  const postId = ownProps.post.id;
+  const postWithComments = state.comments[postId];
+
+  const postComments = postWithComments
+    ? Object.keys(postWithComments).map(key => postWithComments[key])
+    : [];
+
+  return {
+    comments: postComments
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadComments() {

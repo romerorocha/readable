@@ -55,3 +55,12 @@ export const addComment = comment =>
     },
     body: JSON.stringify(comment)
   }).then(res => res.json());
+
+export const deleteComment = id =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
+  }).then(res => res.json());

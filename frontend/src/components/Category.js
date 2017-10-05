@@ -8,7 +8,7 @@ import Error404 from './Error404';
 import Breadcrumbs from './Breadcrumbs';
 
 class Category extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const category = this.props.match.params.category;
     this.props.activate(category);
     this.props.fetchPosts(category);

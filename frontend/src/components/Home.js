@@ -8,9 +8,9 @@ import SortedPosts from '../containers/SortedPosts';
 import Breadcrumbs from './Breadcrumbs';
 
 class Home extends Component {
-  componentWillMount() {
-    this.props.fetchPosts();
+  componentDidMount() {
     this.props.activate(ALL_POSTS);
+    this.props.fetchPosts();
   }
 
   render() {

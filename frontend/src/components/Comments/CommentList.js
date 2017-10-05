@@ -1,7 +1,7 @@
 import React from 'react';
 import { Comment, Icon } from 'semantic-ui-react';
 
-const CommentList = ({ comments, voteAction }) => {
+const CommentList = ({ comments, voteAction, deleteAction }) => {
   return (
     <Comment.Group>
       {comments &&
@@ -29,6 +29,9 @@ const CommentList = ({ comments, voteAction }) => {
                   onClick={() => voteAction(comment.id, 'downVote')}
                 >
                   Dislike
+                </Comment.Action>
+                <Comment.Action onClick={() => deleteAction(comment.id)}>
+                  Delete
                 </Comment.Action>
               </Comment.Actions>
             </Comment.Content>

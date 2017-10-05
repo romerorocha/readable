@@ -8,7 +8,7 @@ import ActionButtons from './ActionButtons';
 import { Container, Divider } from 'semantic-ui-react';
 
 class PostDetail extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const postId = this.props.match.params.postId;
     this.loadPostsIfNeeded(postId);
   }
