@@ -4,9 +4,13 @@ import uiReducer from './UI';
 import postsReducer from './posts';
 import commentsReducer from './comments';
 
-export default combineReducers({
+const entities = combineReducers({
   categories: categoriesReducer,
   posts: postsReducer,
-  comments: commentsReducer,
+  comments: commentsReducer
+});
+
+export default combineReducers({
+  entities,
   ui: uiReducer
 });

@@ -59,7 +59,7 @@ class Post extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const postId = ownProps.post.id;
-  const postWithComments = state.comments[postId];
+  const postWithComments = state.entities.comments[postId];
 
   const postComments = postWithComments
     ? Object.keys(postWithComments).map(key => postWithComments[key])

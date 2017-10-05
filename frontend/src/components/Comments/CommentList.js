@@ -1,16 +1,8 @@
 import React, { Component } from 'react';
 import { Comment, Button, Modal } from 'semantic-ui-react';
-import { connect } from 'react-redux';
-import UUID from 'uuid/v1';
 import CommentItem from './CommentItem';
 import ModalForm from './ModalForm';
 import ModalActions from './ModalActions';
-import {
-  addComment,
-  updateComment,
-  voteOnComment,
-  removeComment
-} from '../../actions/comments';
 
 class CommentList extends Component {
   state = {
@@ -91,26 +83,4 @@ class CommentList extends Component {
     });
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  addNew(body, author) {
-    const comment = {
-      id: UUID(),
-      timestamp: Date.now(),
-      parentId: ownProps.postId,
-      author,
-      body
-    };
-    dispatch(addComment(comment));
-  },
-  update(id, body) {
-    dispatch(updateComment(id, body));
-  },
-  vote(id, vote) {
-    dispatch(voteOnComment(id, vote));
-  },
-  remove(id) {
-    dispatch(removeComment(id));
-  }
-});
-
-export default connect(null, mapDispatchToProps)(CommentList);
+export default CommentList;

@@ -15,7 +15,9 @@ const getPosts = (posts, field, activeCategory) => {
 };
 
 const mapStateToProps = state => {
-  const posts = Object.keys(state.posts.byId).map(key => state.posts.byId[key]);
+  const posts = Object.keys(state.entities.posts.byId).map(
+    key => state.entities.posts.byId[key]
+  );
   return {
     posts: getPosts(posts, state.ui.postsSorting, state.ui.activeMenu)
   };

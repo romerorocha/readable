@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { Header } from 'semantic-ui-react';
 import CommentList from './CommentList';
 import { connect } from 'react-redux';
-import { fetchComments } from '../../actions/comments';
+import UUID from 'uuid/v1';
+import {
+  fetchComments,
+  addComment,
+  updateComment,
+  voteOnComment,
+  removeComment
+} from '../../actions/comments';
 
 class CommentsSection extends Component {
   componentDidMount() {
@@ -10,23 +17,49 @@ class CommentsSection extends Component {
   }
 
   render() {
-    const { postId, comments } = this.props;
+    const { comments, addNew, update, vote, remove } = this.props;
     return [
       <Header key="0" as="h3" dividing>
         Comments ({comments.length})
       </Header>,
-      <CommentList key="1" postId={postId} comments={comments} />
+      <CommentList
+        key="1"
+        comments={comments}
+        addNew={addNew}
+        update={update}
+        vote={vote}
+        remove={remove}
+      />
     ];
   }
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  comments: getSortedComments(state.comments, ownProps.postId)
+  comments: getSortedComments(state.entities.comments, ownProps.postId)
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadComments() {
     dispatch(fetchComments(ownProps.postId));
+  },
+  addNew(body, author) {
+    const comment = {
+      id: UUID(),
+      timestamp: Date.now(),
+      parentId: ownProps.postId,
+      author,
+      body
+    };
+    dispatch(addComment(comment));
+  },
+  update(id, body) {
+    dispatch(updateComment(id, body));
+  },
+  vote(id, vote) {
+    dispatch(voteOnComment(id, vote));
+  },
+  remove(id) {
+    dispatch(removeComment(id));
   }
 });
 

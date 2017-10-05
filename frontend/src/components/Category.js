@@ -37,7 +37,7 @@ class Category extends Component {
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories.map(category => category.name)
+  categories: state.entities.categories.map(category => category.name)
 });
 
 const mapDispatchToProps = dispatch => ({

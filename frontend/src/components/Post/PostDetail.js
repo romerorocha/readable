@@ -41,8 +41,8 @@ class PostDetail extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  post: state.posts.byId[ownProps.match.params.postId],
-  posts: state.posts
+  post: state.entities.posts.byId[ownProps.match.params.postId],
+  posts: state.entities.posts
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
