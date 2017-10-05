@@ -3,7 +3,7 @@ import { Comment, Button, Modal } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import UUID from 'uuid/v1';
 import CommentItem from './CommentItem';
-import CommentForm from './CommentForm';
+import ModalForm from './ModalForm';
 import ModalActions from './ModalActions';
 import {
   addComment,
@@ -28,16 +28,13 @@ class CommentList extends Component {
     return [
       <Button key="0" content="Add Comment" onClick={() => this.show()} />,
       <Modal key="1" dimmer open={open} onClose={this.close}>
-        <Modal.Header>Enter your comment:</Modal.Header>
-        <Modal.Content key="0">
-          <CommentForm
-            emptyFields={emptyFields}
-            changeAction={this.handleChange}
-            id={id}
-            body={body}
-            author={author}
-          />
-        </Modal.Content>,
+        <ModalForm
+          emptyFields={emptyFields}
+          changeAction={this.handleChange}
+          id={id}
+          body={body}
+          author={author}
+        />
         <ModalActions submit={this.handleSubmit} close={this.close} />
       </Modal>,
       <Comment.Group key="2">
@@ -66,12 +63,10 @@ class CommentList extends Component {
   };
 
   saveComment = (id, author, body) => {
-    const { add, update } = this.props;
-
     if (id !== '') {
-      update(id, body);
+      this.props.update(id, body);
     } else {
-      add(author, body);
+      this.props.addNew(author, body);
     }
     this.close();
   };
@@ -97,7 +92,7 @@ class CommentList extends Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  add(body, author) {
+  addNew(body, author) {
     const comment = {
       id: UUID(),
       timestamp: Date.now(),

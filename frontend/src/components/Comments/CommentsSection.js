@@ -4,7 +4,7 @@ import CommentList from './CommentList';
 import { connect } from 'react-redux';
 import { fetchComments } from '../../actions/comments';
 
-class Comments extends Component {
+class CommentsSection extends Component {
   componentDidMount() {
     this.props.loadComments();
   }
@@ -39,4 +39,4 @@ const getSortedComments = (comments, postId) => {
     : [];
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Comments);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsSection);
