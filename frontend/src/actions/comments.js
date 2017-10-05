@@ -1,5 +1,6 @@
 import * as ReadableApi from '../util/ReadableApi';
 import { RECEIVE_COMMENTS, VOTE_ON_COMMENT, ADD_COMMENT } from './types';
+
 export const receiveComments = comments => ({
   type: RECEIVE_COMMENTS,
   comments

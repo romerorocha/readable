@@ -4,22 +4,31 @@ import {
   ADD_COMMENT
 } from '../actions/types';
 
-const commentsReducer = (state = {}, action) => {
+const commentsReducer = (state = { byId: {} }, action) => {
   switch (action.type) {
     case RECEIVE_COMMENTS:
-      return action.comments.reduce((acc, value) => {
-        acc[value.id] = value;
-        return acc;
-      }, {});
+      return {
+        ...state,
+        byId: action.comments.reduce((acc, value) => {
+          acc[value.id] = value;
+          return acc;
+        }, state.byId)
+      };
     case VOTE_ON_COMMENT:
       return {
         ...state,
-        [action.comment.id]: action.comment
+        byId: {
+          ...state.byId,
+          [action.comment.id]: action.comment
+        }
       };
     case ADD_COMMENT:
       return {
         ...state,
-        [action.comment.id]: action.comment
+        byId: {
+          ...state.byId,
+          [action.comment.id]: action.comment
+        }
       };
     default:
       return state;

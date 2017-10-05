@@ -22,9 +22,10 @@ class Comments extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   comments: getSortedComments(
-    Object.keys(state.comments).map(key => state.comments[key])
+    Object.keys(state.comments.byId).map(key => state.comments.byId[key]),
+    ownProps.postId
   )
 });
 
@@ -37,8 +38,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 });
 
-const getSortedComments = comments => {
-  return comments.slice().sort((a, b) => b.voteScore - a.voteScore);
+const getSortedComments = (comments, postId) => {
+  return comments
+    .filter(comment => comment.parentId === postId)
+    .sort((a, b) => b.voteScore - a.voteScore);
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comments);
