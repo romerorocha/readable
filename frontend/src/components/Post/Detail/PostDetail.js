@@ -14,7 +14,7 @@ class PostDetail extends Component {
   }
 
   loadPostsIfNeeded = id => {
-    if (Object.keys(this.props.posts.byId).length === 0) {
+    if (Object.keys(this.props.posts).length === 0) {
       this.props.loadPost(id);
     }
   };
@@ -41,7 +41,7 @@ class PostDetail extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  post: state.entities.posts.byId[ownProps.match.params.postId],
+  post: state.entities.posts[ownProps.match.params.postId],
   posts: state.entities.posts
 });
 

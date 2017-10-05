@@ -1,9 +1,7 @@
 import {
   RECEIVE_COMMENTS,
-  VOTE_ON_COMMENT,
-  ADD_COMMENT,
-  REMOVE_COMMENT,
-  UPDATE_COMMENT
+  RECEIVE_COMMENT,
+  REMOVE_COMMENT
 } from '../actions/types';
 
 export const commentsReducer = (state = {}, action) => {
@@ -22,15 +20,7 @@ export const commentsReducer = (state = {}, action) => {
           return acc;
         }, {})
       };
-    case VOTE_ON_COMMENT:
-      return {
-        ...state,
-        [action.comment.parentId]: {
-          ...state[action.comment.parentId],
-          [action.comment.id]: action.comment
-        }
-      };
-    case ADD_COMMENT:
+    case RECEIVE_COMMENT:
       return {
         ...state,
         [action.comment.parentId]: {
@@ -42,14 +32,6 @@ export const commentsReducer = (state = {}, action) => {
       delete state[action.comment.parentId][action.comment.id];
       return {
         ...state
-      };
-    case UPDATE_COMMENT:
-      return {
-        ...state,
-        [action.comment.parentId]: {
-          ...state[action.comment.parentId],
-          [action.comment.id]: action.comment
-        }
       };
     default:
       return state;
