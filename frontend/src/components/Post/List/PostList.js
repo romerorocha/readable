@@ -1,19 +1,19 @@
 import React from 'react';
-import Post from './Post';
+import PostItem from './PostItem';
 import { Item, Container } from 'semantic-ui-react';
 import OrderByButtons from './OrderByButtons';
 
-const Posts = ({ posts, voteAction }) => {
+const PostList = ({ posts, voteAction }) => {
   return (
     <Container fluid>
       <OrderByButtons />
       <Item.Group divided>
         {posts.map(post => (
-          <Post key={post.id} post={post} voteAction={voteAction} />
+          <PostItem key={post.id} post={post} voteAction={voteAction} />
         ))}
       </Item.Group>
     </Container>
   );
 };
 
-export default Posts;
+export default PostList;

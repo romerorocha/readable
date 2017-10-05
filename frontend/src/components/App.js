@@ -2,9 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import MainMenu from './Menu/MainMenu';
-import Home from '../components/Home';
-import Category from '../components/Category';
-import PostDetail from '../components/Post/PostDetail';
+import Home from '../components/Pages/Home';
+import Category from '../components/Pages/Category';
+import PostDetail from '../components/Post/Detail/PostDetail';
 import PostForm from '../components/Post/PostForm';
 import { Container } from 'semantic-ui-react';
 

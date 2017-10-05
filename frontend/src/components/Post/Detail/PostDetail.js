@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPost, voteOnPost } from '../../actions/posts';
-import Breadcrumbs from '../Breadcrumbs';
-import SortedComments from '../../containers/SortedComments';
-import PostContent from './PostContent';
-import ActionButtons from './ActionButtons';
+import Breadcrumbs from '../../Misc/Breadcrumbs';
+import SortedComments from '../../../containers/SortedComments';
+import PostBody from './PostBody';
+import ActionButtons from '../ActionButtons';
 import { Container, Divider } from 'semantic-ui-react';
+import { fetchPost, voteOnPost } from '../../../actions/posts';
 
 class PostDetail extends Component {
   componentDidMount() {
@@ -31,7 +31,7 @@ class PostDetail extends Component {
           voteAction={votePost}
           voteScore={post.voteScore}
         />
-        <PostContent post={post} />
+        <PostBody post={post} />
         <SortedComments postId={post.id} />
       </Container>
     ) : (
