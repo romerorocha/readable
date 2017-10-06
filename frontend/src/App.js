@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainMenu from './components/Menu/MainMenu';
 import Home from './components/MainPages/Home';
 import Category from './components/MainPages/Category';
@@ -14,10 +14,12 @@ const App = ({ store }) => {
       <BrowserRouter>
         <Container fluid>
           <MainMenu />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/posts/new" component={NewPost} />
-          <Route exact path="/:category" component={Category} />
-          <Route exact path="/:category/:postId" component={PostDetail} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/posts/new" component={NewPost} />
+            <Route exact path="/:category" component={Category} />
+            <Route exact path="/:category/:postId" component={PostDetail} />
+          </Switch>
         </Container>
       </BrowserRouter>
     </Provider>
