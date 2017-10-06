@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchComments } from '../../../actions/comments';
+import { fetchComments } from '../../actions/comments';
 import { Link } from 'react-router-dom';
-import ActionButtons from '../ActionButtons';
+import ActionButtons from './ActionButtons';
 import { Item, Icon } from 'semantic-ui-react';
 
 class PostItem extends Component {
@@ -23,7 +23,7 @@ class PostItem extends Component {
       <Item>
         <Item.Image
           size="tiny"
-          src={require(`../../../img/${post.category}-small.png`)}
+          src={require(`../../img/${post.category}-small.png`)}
         />
         <Item.Content>
           <Link to={`/${post.category}/${post.id}`}>

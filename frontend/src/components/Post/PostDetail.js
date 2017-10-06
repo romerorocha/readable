@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Breadcrumbs from '../../Misc/Breadcrumbs';
-import SortedComments from '../../../containers/SortedComments';
+import Breadcrumbs from '../Misc/Breadcrumbs';
+import SortedComments from '../../containers/SortedComments';
 import PostBody from './PostBody';
-import ActionButtons from '../ActionButtons';
+import ActionButtons from './ActionButtons';
 import { Container, Divider } from 'semantic-ui-react';
-import { fetchPost, voteOnPost } from '../../../actions/posts';
+import { fetchPost, voteOnPost } from '../../actions/posts';
 
 class PostDetail extends Component {
   componentDidMount() {

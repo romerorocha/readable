@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { ALL_POSTS } from '../util/Constants';
 import { voteOnPost } from '../actions/posts';
-import PostList from '../components/Post/List/PostList';
+import PostList from '../components/Post/PostList';
 
 const getPosts = (posts, field, activeCategory) => {
   switch (activeCategory) {
