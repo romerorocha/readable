@@ -2,10 +2,10 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import MainMenu from './components/Menu/MainMenu';
-import Home from './components/Pages/Home';
-import Category from './components/Pages/Category';
+import Home from './components/MainPages/Home';
+import Category from './components/MainPages/Category';
+import NewPost from './components/MainPages/NewPost';
 import PostDetail from './components/Post/PostDetail';
-import PostForm from './components/Post/PostForm';
 import { Container } from 'semantic-ui-react';
 
 const App = ({ store }) => {
@@ -15,9 +15,9 @@ const App = ({ store }) => {
         <Container fluid>
           <MainMenu />
           <Route exact path="/" component={Home} />
+          <Route exact path="/posts/new" component={NewPost} />
           <Route exact path="/:category" component={Category} />
           <Route exact path="/:category/:postId" component={PostDetail} />
-          <Route path="/postform" component={PostForm} />
         </Container>
       </BrowserRouter>
     </Provider>

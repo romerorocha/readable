@@ -15,7 +15,7 @@ class Home extends Component {
 
   render() {
     return (
-      <Container>
+      <Container style={{ marginTop: '7em' }}>
         <Breadcrumbs category="all posts" />
         <Divider />
         <SortedPosts />

@@ -23,7 +23,7 @@ class PostDetail extends Component {
     const { post, votePost } = this.props;
 
     return post ? (
-      <Container>
+      <Container style={{ marginTop: '7em' }}>
         <Breadcrumbs category={post.category} post />
         <Divider />
         <ActionButtons

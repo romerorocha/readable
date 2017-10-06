@@ -3,9 +3,8 @@ import { Container, Divider } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { activateMenu } from '../../actions/UI';
 import { fetchPostsByCategory } from '../../actions/posts';
-import SortedPosts from '../../containers/SortedPosts';
-import Error404 from '../Misc/Error404';
 import Breadcrumbs from '../Misc/Breadcrumbs';
+import CategoryPosts from '../Post/CategoryPosts';
 
 class Category extends Component {
   componentDidMount() {
@@ -27,10 +26,10 @@ class Category extends Component {
     const { categories } = this.props;
 
     return (
-      <Container>
+      <Container style={{ marginTop: '7em' }}>
         <Breadcrumbs category={category} />
         <Divider />
-        {categories.includes(category) ? <SortedPosts /> : <Error404 />}
+        <CategoryPosts category={category} existingCategories={categories} />
       </Container>
     );
   }
