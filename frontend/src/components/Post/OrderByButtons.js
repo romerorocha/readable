@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sortPostsBy } from '../../actions/UI';
-import { TIMESTAMP, VOTE_SCORE } from '../../util/Constants';
+import { SORTING } from '../../util/Constants';
 import { Button, Container } from 'semantic-ui-react';
 
 const OrderByButtons = ({ sortBy, sorting }) => {
@@ -13,16 +13,16 @@ const OrderByButtons = ({ sortBy, sorting }) => {
     <Container textAlign="center">
       <Button.Group size="small">
         <Button
-          name={VOTE_SCORE}
+          name={SORTING.VOTE_SCORE}
           onClick={handleSorting}
-          active={sorting === VOTE_SCORE}
+          active={sorting === SORTING.VOTE_SCORE}
           content="Sort by votes"
         />
         <Button.Or />
         <Button
-          name={TIMESTAMP}
+          name={SORTING.TIMESTAMP}
           onClick={handleSorting}
-          active={sorting === TIMESTAMP}
+          active={sorting === SORTING.TIMESTAMP}
           content="Sort by date"
         />
       </Button.Group>

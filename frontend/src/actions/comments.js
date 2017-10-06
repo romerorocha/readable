@@ -1,5 +1,10 @@
 import * as ReadableApi from '../util/ReadableApi';
-import { RECEIVE_COMMENTS, RECEIVE_COMMENT, REMOVE_COMMENT } from './types';
+import {
+  RECEIVE_COMMENTS,
+  RECEIVE_COMMENT,
+  REMOVE_COMMENT,
+  VOTE_ON_COMMENT
+} from './types';
 
 // Load all comments of a post
 const receiveComments = (comments, parentId) => ({
@@ -16,6 +21,11 @@ const remove = comment => ({
 // Load comment returned by API's add, update and vote.
 const receive = comment => ({
   type: RECEIVE_COMMENT,
+  comment
+});
+
+const vote = comment => ({
+  type: VOTE_ON_COMMENT,
   comment
 });
 
@@ -42,5 +52,5 @@ export const removeComment = id => async dispatch => {
 
 export const voteOnComment = (id, voteValue) => async dispatch => {
   const comment = await ReadableApi.voteOnComment(id, voteValue);
-  return dispatch(receive(comment));
+  return dispatch(vote(comment));
 };

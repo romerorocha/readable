@@ -23,7 +23,7 @@ class PostItem extends Component {
       <Item>
         <Item.Image
           size="tiny"
-          src={require(`../../img/${post.category}-small.png`)}
+          src={require(`./img/${post.category}-small.png`)}
         />
         <Item.Content>
           <Link to={`/${post.category}/${post.id}`}>
