@@ -6,21 +6,19 @@ import {
   VOTE_ON_COMMENT
 } from './types';
 
-// Load all comments of a post
 const receiveComments = (comments, parentId) => ({
   type: RECEIVE_COMMENTS,
   parentId,
   comments
 });
 
-const remove = comment => ({
-  type: REMOVE_COMMENT,
+const receiveComment = comment => ({
+  type: RECEIVE_COMMENT,
   comment
 });
 
-// Load comment returned by API's add, update and vote.
-const receive = comment => ({
-  type: RECEIVE_COMMENT,
+const remove = comment => ({
+  type: REMOVE_COMMENT,
   comment
 });
 
@@ -29,7 +27,6 @@ const vote = comment => ({
   comment
 });
 
-// Thunks - Async fetching / Actions
 export const fetchComments = postId => async dispatch => {
   const comments = await ReadableApi.getComments(postId);
   return dispatch(receiveComments(comments, postId));
@@ -37,12 +34,12 @@ export const fetchComments = postId => async dispatch => {
 
 export const addComment = comment => async dispatch => {
   const newComment = await ReadableApi.addComment(comment);
-  return dispatch(receive(newComment));
+  return dispatch(receiveComment(newComment));
 };
 
 export const updateComment = (id, body) => async dispatch => {
   const comment = await ReadableApi.updateComment(id, body);
-  return dispatch(receive(comment));
+  return dispatch(receiveComment(comment));
 };
 
 export const removeComment = id => async dispatch => {

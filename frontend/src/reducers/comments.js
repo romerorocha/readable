@@ -33,10 +33,9 @@ function addCommentsToParentId(state, action) {
 }
 
 function deleteComment(state, action) {
-  delete state[action.comment.parentId][action.comment.id];
-  return {
-    ...state
-  };
+  let nextState = { ...state };
+  delete nextState[action.comment.parentId][action.comment.id];
+  return nextState;
 }
 
 function addCommentToParentId(state, action) {

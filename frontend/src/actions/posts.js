@@ -1,17 +1,17 @@
 import * as ReadableApi from '../util/ReadableApi';
 import { RECEIVE_POSTS, VOTE_ON_POST, RECEIVE_POST } from './types';
 
-export const receivePosts = posts => ({
+const receivePosts = posts => ({
   type: RECEIVE_POSTS,
   posts
 });
 
-export const vote = post => ({
+const vote = post => ({
   type: VOTE_ON_POST,
   post
 });
 
-export const receivePost = post => ({
+const receivePost = post => ({
   type: RECEIVE_POST,
   post
 });

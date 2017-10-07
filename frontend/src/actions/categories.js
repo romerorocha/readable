@@ -1,7 +1,7 @@
 import * as ReadableApi from '../util/ReadableApi';
 import { RECEIVE_CATEGORIES } from './types';
 
-export const receiveCategories = categories => ({
+const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
   categories: categories
 });
