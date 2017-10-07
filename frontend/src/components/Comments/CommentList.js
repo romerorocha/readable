@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Header, Comment, Button } from 'semantic-ui-react';
+import { Header, Comment, Button, Modal } from 'semantic-ui-react';
 import CommentItem from './CommentItem';
 import ModalForm from './ModalForm';
 import { EMPTY } from '../../util/Constants';
@@ -25,16 +25,16 @@ class CommentList extends Component {
         Comments ({comments.length})
       </Header>,
       <Button key="1" content="Add Comment" onClick={() => this.show()} />,
-      <ModalForm
-        open={open}
-        key="2"
-        closeAction={this.close}
-        changeAction={this.handleChange}
-        submitAction={this.handleSubmit}
-        id={id}
-        body={body}
-        author={author}
-      />,
+      <Modal key="2" dimmer open={open} onClose={this.close}>
+        <ModalForm
+          closeAction={this.close}
+          submitAction={this.handleSubmit}
+          changeAction={this.handleChange}
+          id={id}
+          body={body}
+          author={author}
+        />,
+      </Modal>,
       <Comment.Group key="3">
         {comments &&
           comments.map(comment => (
