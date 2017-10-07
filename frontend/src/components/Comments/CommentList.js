@@ -24,7 +24,12 @@ class CommentList extends Component {
       <Header key="0" as="h3" dividing>
         Comments ({comments.length})
       </Header>,
-      <Button key="1" content="Add Comment" onClick={() => this.show()} />,
+      <Button
+        key="1"
+        primary
+        content="Add Comment"
+        onClick={() => this.show()}
+      />,
       <Modal key="2" dimmer open={open} onClose={this.close}>
         <ModalForm
           closeAction={this.close}

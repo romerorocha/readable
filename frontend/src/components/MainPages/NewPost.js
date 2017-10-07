@@ -45,52 +45,50 @@ class NewPost extends Component {
         <Breadcrumbs category="new post" />
         <Divider />
         <Form onSubmit={this.handleSubmit}>
-          <Form.Field>
-            <Form.Dropdown
-              placeholder="Select Category"
-              required
-              label="Category"
-              fluid
-              search
-              selection
-              options={categories}
-              name="category"
-              value={category}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Form.Input
-              label="Your name"
-              required
-              placeholder="Name"
-              name="author"
-              value={author}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Form.Input
-              label="Post Title"
-              required
-              placeholder="Title"
-              name="title"
-              value={title}
-              onChange={this.handleChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Form.TextArea
-              label="Text"
-              required
-              autoHeight
-              placeholder="Whatever you are thinking..."
-              name="body"
-              value={body}
-              onInput={this.handleChange}
-            />
-          </Form.Field>
-          <Button type="submit">Submit</Button>
+          <Form.Dropdown
+            placeholder="Select Category"
+            required
+            label="Category"
+            fluid
+            search
+            selection
+            options={categories}
+            name="category"
+            value={category}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label="Your name"
+            required
+            placeholder="Name"
+            name="author"
+            value={author}
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label="Post Title"
+            required
+            placeholder="Title"
+            name="title"
+            value={title}
+            onChange={this.handleChange}
+          />
+          <Form.TextArea
+            label="Text"
+            required
+            autoHeight
+            placeholder="Whatever you are thinking..."
+            name="body"
+            value={body}
+            onInput={this.handleChange}
+          />
+          <Button
+            primary
+            icon="checkmark"
+            labelPosition="right"
+            type="submit"
+            content="Submit"
+          />
         </Form>
       </Container>
     );

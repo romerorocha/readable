@@ -8,6 +8,7 @@ const ModalForm = ({ id, author, body, changeAction, submitAction }) => {
     <Modal.Content key="1">
       <Form onSubmit={submitAction}>
         <Form.Input
+          label="Your Name"
           placeholder="Name"
           name="author"
           required
@@ -16,11 +17,12 @@ const ModalForm = ({ id, author, body, changeAction, submitAction }) => {
           onChange={changeAction}
         />
         <Form.TextArea
-          placeholder="Comment"
+          label="Comment"
+          placeholder="Text here"
           required
           name="body"
           value={body}
-          onChange={changeAction}
+          onInput={changeAction}
         />
         <Button
           type="submit"
