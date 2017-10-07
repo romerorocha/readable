@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Breadcrumbs from '../Misc/Breadcrumbs';
 import SortedComments from '../../containers/SortedComments';
 import PostBody from './PostBody';
 import ActionButtons from './ActionButtons';
 import { Container, Divider } from 'semantic-ui-react';
-import { fetchPost, voteOnPost } from '../../actions/posts';
+import { fetchPost, voteOnPost, removePost } from '../../actions/posts';
 
 class PostDetail extends Component {
   componentDidMount() {
-    const postId = this.props.match.params.postId;
-    this.loadPostsIfNeeded(postId);
+    if (Object.keys(this.props.posts).length === 0) {
+      this.props.loadPost();
+    }
   }
 
-  loadPostsIfNeeded = id => {
-    if (Object.keys(this.props.posts).length === 0) {
-      this.props.loadPost(id);
-    }
+  handleRemoving = () => {
+    this.props.remove();
+    this.props.history.push('/');
   };
 
   render() {
@@ -28,7 +29,8 @@ class PostDetail extends Component {
         <Divider />
         <ActionButtons
           key="0"
-          voteAction={votePost}
+          vote={votePost}
+          remove={this.handleRemoving}
           voteScore={post.voteScore}
         />
         <PostBody post={post} />
@@ -45,13 +47,22 @@ const mapStateToProps = (state, ownProps) => ({
   posts: state.entities.posts
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  loadPost(id) {
-    dispatch(fetchPost(id));
-  },
-  votePost(vote) {
-    dispatch(voteOnPost(ownProps.match.params.postId, vote));
-  }
-});
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const { postId } = ownProps.match.params;
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostDetail);
+  return {
+    loadPost: () => {
+      dispatch(fetchPost(postId));
+    },
+    votePost: vote => {
+      dispatch(voteOnPost(postId, vote));
+    },
+    remove: () => {
+      dispatch(removePost(postId));
+    }
+  };
+};
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PostDetail)
+);

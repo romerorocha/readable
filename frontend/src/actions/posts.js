@@ -1,5 +1,10 @@
 import * as API from '../util/PostsAPI';
-import { RECEIVE_POSTS, VOTE_ON_POST, RECEIVE_POST } from './types';
+import {
+  RECEIVE_POSTS,
+  VOTE_ON_POST,
+  RECEIVE_POST,
+  REMOVE_POST
+} from './types';
 
 const receivePosts = posts => ({
   type: RECEIVE_POSTS,
@@ -13,6 +18,11 @@ const vote = post => ({
 
 const receivePost = post => ({
   type: RECEIVE_POST,
+  post
+});
+
+const remove = post => ({
+  type: REMOVE_POST,
   post
 });
 
@@ -39,4 +49,9 @@ export const fetchPost = postId => async dispatch => {
 export const addPost = post => async dispatch => {
   const newPost = await API.addPost(post);
   return dispatch(receivePost(newPost));
+};
+
+export const removePost = id => async dispatch => {
+  const deletedPost = await API.deletePost(id);
+  return dispatch(remove(deletedPost));
 };

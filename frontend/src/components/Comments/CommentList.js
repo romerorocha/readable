@@ -32,7 +32,6 @@ class CommentList extends Component {
       />,
       <Modal key="2" dimmer open={open} onClose={this.close}>
         <ModalForm
-          closeAction={this.close}
           submitAction={this.handleSubmit}
           changeAction={this.handleChange}
           id={id}

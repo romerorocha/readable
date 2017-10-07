@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchComments } from '../../actions/comments';
+import { voteOnPost, removePost } from '../../actions/posts';
 import { Link } from 'react-router-dom';
 import ActionButtons from './ActionButtons';
 import { Item, Icon } from 'semantic-ui-react';
@@ -10,13 +11,8 @@ class PostItem extends Component {
     this.props.loadComments();
   }
 
-  handleVote = vote => {
-    const { post, voteAction } = this.props;
-    voteAction(post.id, vote);
-  };
-
   render() {
-    const { post, comments } = this.props;
+    const { post, numberOfComments, remove, vote } = this.props;
     const postDate = new Date(post.timestamp).toLocaleString();
 
     return (
@@ -35,12 +31,10 @@ class PostItem extends Component {
             </Item.Meta>
             <Item.Meta>
               <span>
-                <strong>
-                  {comments.length} comments{' '}
-                  {comments.length >= 5 ? (
-                    <Icon name="fire" color="red" />
-                  ) : null}
-                </strong>
+                Comments: {numberOfComments}{' '}
+                {numberOfComments >= 5 ? (
+                  <Icon name="fire" color="red" />
+                ) : null}
               </span>
             </Item.Meta>
           </Link>
@@ -48,7 +42,8 @@ class PostItem extends Component {
           <Item.Extra>
             <ActionButtons
               voteScore={post.voteScore}
-              voteAction={this.handleVote}
+              remove={remove}
+              vote={vote}
             />
           </Item.Extra>
         </Item.Content>
@@ -58,21 +53,24 @@ class PostItem extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const postId = ownProps.post.id;
-  const postWithComments = state.entities.comments[postId];
-
-  const postComments = postWithComments
-    ? Object.keys(postWithComments).map(key => postWithComments[key])
-    : [];
+  const postWithComments = state.entities.comments[ownProps.post.id];
 
   return {
-    comments: postComments
+    numberOfComments: postWithComments
+      ? Object.keys(postWithComments).length
+      : 0
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   loadComments() {
     dispatch(fetchComments(ownProps.post.id));
+  },
+  vote(vote) {
+    dispatch(voteOnPost(ownProps.post.id, vote));
+  },
+  remove() {
+    dispatch(removePost(ownProps.post.id));
   }
 });
 
