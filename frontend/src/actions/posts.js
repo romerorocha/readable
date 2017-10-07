@@ -1,4 +1,4 @@
-import * as ReadableApi from '../util/ReadableApi';
+import * as API from '../util/PostsAPI';
 import { RECEIVE_POSTS, VOTE_ON_POST, RECEIVE_POST } from './types';
 
 const receivePosts = posts => ({
@@ -17,21 +17,26 @@ const receivePost = post => ({
 });
 
 export const fetchAllPosts = () => async dispatch => {
-  const posts = await ReadableApi.getAllPosts();
+  const posts = await API.getAllPosts();
   return dispatch(receivePosts(posts));
 };
 
 export const fetchPostsByCategory = category => async dispatch => {
-  const posts = await ReadableApi.getPosts(category);
+  const posts = await API.getPosts(category);
   return dispatch(receivePosts(posts));
 };
 
 export const voteOnPost = (id, voteValue) => async dispatch => {
-  const post = await ReadableApi.voteOnPost(id, voteValue);
+  const post = await API.voteOnPost(id, voteValue);
   return dispatch(vote(post));
 };
 
 export const fetchPost = postId => async dispatch => {
-  const post = await ReadableApi.getPost(postId);
+  const post = await API.getPost(postId);
   return dispatch(receivePost(post));
+};
+
+export const addPost = post => async dispatch => {
+  const newPost = await API.addPost(post);
+  return dispatch(receivePost(newPost));
 };

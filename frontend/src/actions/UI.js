@@ -5,7 +5,6 @@ export const activateMenu = menu => ({
   activeMenu: menu
 });
 
-// Posts sorting
 export const sortPostsBy = sorting => ({
   type: SORT_POSTS_BY,
   sorting

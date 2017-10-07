@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
+import { EMPTY } from '../../util/Constants';
 import { connect } from 'react-redux';
 import { activateMenu } from '../../actions/UI';
+import { addPost } from '../../actions/posts';
 import { NEW_POST } from '../../util/Constants';
 import { Container, Divider, Form, Button } from 'semantic-ui-react';
 import Breadcrumbs from '../Misc/Breadcrumbs';
 import capitalize from 'lodash/capitalize';
+import UUID from 'uuid/v1';
 
 class NewPost extends Component {
   state = {
+    id: EMPTY,
     category: 'react',
-    author: '',
-    title: '',
-    body: ''
+    author: EMPTY,
+    title: EMPTY,
+    body: EMPTY
   };
 
   componentDidMount() {
@@ -26,6 +30,10 @@ class NewPost extends Component {
     }));
   }
 
+  handleSubmit = () => {
+    this.props.save(this.state);
+  };
+
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   render() {
@@ -36,11 +44,12 @@ class NewPost extends Component {
       <Container style={{ marginTop: '7em' }}>
         <Breadcrumbs category="new post" />
         <Divider />
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Field>
-            <label>Category</label>
             <Form.Dropdown
               placeholder="Select Category"
+              required
+              label="Category"
               fluid
               search
               selection
@@ -51,8 +60,9 @@ class NewPost extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Your name</label>
             <Form.Input
+              label="Your name"
+              required
               placeholder="Name"
               name="author"
               value={author}
@@ -60,8 +70,9 @@ class NewPost extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Post Title</label>
             <Form.Input
+              label="Post Title"
+              required
               placeholder="Title"
               name="title"
               value={title}
@@ -69,13 +80,14 @@ class NewPost extends Component {
             />
           </Form.Field>
           <Form.Field>
-            <label>Text</label>
             <Form.TextArea
+              label="Text"
+              required
               autoHeight
               placeholder="Whatever you are thinking..."
               name="body"
               value={body}
-              onChange={this.handleChange}
+              onInput={this.handleChange}
             />
           </Form.Field>
           <Button type="submit">Submit</Button>
@@ -92,6 +104,13 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   activate(menu) {
     dispatch(activateMenu(menu));
+  },
+  save(post) {
+    if (post.id === EMPTY) {
+      post.id = UUID();
+      post.timestamp = Date.now();
+      dispatch(addPost(post));
+    }
   }
 });
 

@@ -1,4 +1,4 @@
-import * as ReadableApi from '../util/ReadableApi';
+import * as API from '../util/CommentsAPI';
 import {
   RECEIVE_COMMENTS,
   RECEIVE_COMMENT,
@@ -28,26 +28,26 @@ const vote = comment => ({
 });
 
 export const fetchComments = postId => async dispatch => {
-  const comments = await ReadableApi.getComments(postId);
+  const comments = await API.getComments(postId);
   return dispatch(receiveComments(comments, postId));
 };
 
 export const addComment = comment => async dispatch => {
-  const newComment = await ReadableApi.addComment(comment);
+  const newComment = await API.addComment(comment);
   return dispatch(receiveComment(newComment));
 };
 
 export const updateComment = (id, body) => async dispatch => {
-  const comment = await ReadableApi.updateComment(id, body);
+  const comment = await API.updateComment(id, body);
   return dispatch(receiveComment(comment));
 };
 
 export const removeComment = id => async dispatch => {
-  const deletedComment = await ReadableApi.deleteComment(id);
+  const deletedComment = await API.deleteComment(id);
   return dispatch(remove(deletedComment));
 };
 
 export const voteOnComment = (id, voteValue) => async dispatch => {
-  const comment = await ReadableApi.voteOnComment(id, voteValue);
+  const comment = await API.voteOnComment(id, voteValue);
   return dispatch(vote(comment));
 };

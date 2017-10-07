@@ -1,32 +1,47 @@
 import React from 'react';
-import { Form, Modal, Message } from 'semantic-ui-react';
+import { Form, Modal, Button } from 'semantic-ui-react';
 import { EMPTY } from '../../util/Constants';
 
-const ModalForm = ({ emptyFields, id, author, body, changeAction }) => {
-  return [
-    <Modal.Header key="0">Enter your comment:</Modal.Header>,
-    <Modal.Content key="1">
-      <Form error={emptyFields}>
-        <Message
-          error
-          content="Whoops... You forgot to tell us something! All fields are required :)"
-        />
-        <Form.Input
-          placeholder="Name"
-          name="author"
-          value={author}
-          disabled={id !== EMPTY}
-          onChange={changeAction}
-        />
-        <Form.TextArea
-          placeholder="Comment"
-          name="body"
-          value={body}
-          onChange={changeAction}
-        />
-      </Form>
-    </Modal.Content>
-  ];
+const ModalForm = ({
+  id,
+  author,
+  body,
+  changeAction,
+  submitAction,
+  closeAction,
+  open
+}) => {
+  return (
+    <Modal dimmer open={open} onClose={closeAction}>
+      <Modal.Header>Enter your comment:</Modal.Header>,
+      <Modal.Content>
+        <Form onSubmit={submitAction}>
+          <Form.Input
+            placeholder="Name"
+            name="author"
+            required
+            value={author}
+            disabled={id !== EMPTY}
+            onChange={changeAction}
+          />
+          <Form.TextArea
+            placeholder="Comment"
+            required
+            name="body"
+            value={body}
+            onChange={changeAction}
+          />
+          <Button
+            type="submit"
+            primary
+            icon="checkmark"
+            labelPosition="right"
+            content="Comment!"
+          />
+        </Form>
+      </Modal.Content>
+    </Modal>
+  );
 };
 
 export default ModalForm;

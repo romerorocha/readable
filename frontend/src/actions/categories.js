@@ -1,4 +1,4 @@
-import * as ReadableApi from '../util/ReadableApi';
+import * as API from '../util/CategoriesAPI';
 import { RECEIVE_CATEGORIES } from './types';
 
 const receiveCategories = categories => ({
@@ -7,6 +7,6 @@ const receiveCategories = categories => ({
 });
 
 export const fetchCategories = () => async dispatch => {
-  const categories = await ReadableApi.getCategories();
+  const categories = await API.getCategories();
   return dispatch(receiveCategories(categories));
 };
