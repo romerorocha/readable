@@ -15,7 +15,9 @@ const CommentItem = ({ comment, voteAction, removeAction, editAction }) => {
         <Comment.Metadata>
           <strong>{comment.voteScore}</strong>
         </Comment.Metadata>
-        <Comment.Text>{comment.body}</Comment.Text>
+        <Comment.Text className="display-linebreak">
+          {comment.body}
+        </Comment.Text>
         <Comment.Actions>
           <Button.Group basic>
             <Comment.Action

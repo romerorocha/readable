@@ -29,16 +29,13 @@ class PostItem extends Component {
                 <strong>{post.author}</strong> - {postDate}
               </span>
             </Item.Meta>
-            <Item.Meta>
-              <span>
-                Comments: {numberOfComments}{' '}
-                {numberOfComments >= 5 ? (
-                  <Icon name="fire" color="red" />
-                ) : null}
-              </span>
-            </Item.Meta>
           </Link>
-          <Item.Description>{post.body}</Item.Description>
+          <Item.Description>
+            <span>
+              Comments: {numberOfComments}{' '}
+              {numberOfComments >= 5 ? <Icon name="fire" color="red" /> : null}
+            </span>
+          </Item.Description>
           <Item.Extra>
             <ActionButtons
               voteScore={post.voteScore}

@@ -15,7 +15,7 @@ const PostContent = ({ post }) => {
         <Icon name="calendar" />
         <strong>{postDate}</strong>
       </p>
-      <p>{post.body}</p>
+      <p className="display-linebreak">{post.body}</p>
     </Container>
   );
 };
