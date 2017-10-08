@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { fetchComments } from '../../actions/comments';
 import { voteOnPost, removePost } from '../../actions/posts';
 import { Link } from 'react-router-dom';
@@ -10,6 +11,17 @@ class PostItem extends Component {
   componentDidMount() {
     this.props.loadComments();
   }
+
+  handleEditing = () => {
+    const { id, category, author, title, body } = this.props.post;
+
+    const location = {
+      pathname: '/posts/edit',
+      state: { id, category, author, title, body }
+    };
+
+    this.props.history.push(location);
+  };
 
   render() {
     const { post, numberOfComments, remove, vote } = this.props;
@@ -41,6 +53,7 @@ class PostItem extends Component {
               voteScore={post.voteScore}
               remove={remove}
               vote={vote}
+              edit={this.handleEditing}
             />
           </Item.Extra>
         </Item.Content>
@@ -71,4 +84,6 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostItem);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PostItem)
+);

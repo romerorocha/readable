@@ -38,3 +38,14 @@ export const deletePost = id =>
       'Content-Type': 'application/json'
     }
   }).then(res => res.json());
+
+export const updatePost = (id, title, body) => {
+  return fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ title, body })
+  }).then(res => res.json());
+};

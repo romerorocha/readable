@@ -3,7 +3,7 @@ import { EMPTY } from '../../util/Constants';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { activateMenu } from '../../actions/UI';
-import { addPost } from '../../actions/posts';
+import { addPost, updatePost } from '../../actions/posts';
 import { NEW_POST } from '../../util/Constants';
 import { Container, Divider, Form, Button } from 'semantic-ui-react';
 import Breadcrumbs from '../Misc/Breadcrumbs';
@@ -40,8 +40,9 @@ class NewPost extends Component {
   }
 
   handleSubmit = () => {
-    this.props.save(this.state);
-    this.props.history.push('/');
+    const { location, history, save } = this.props;
+    save(this.state);
+    location.state ? history.goBack() : history.push('/');
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
@@ -120,6 +121,8 @@ const mapDispatchToProps = dispatch => ({
       post.id = UUID();
       post.timestamp = Date.now();
       dispatch(addPost(post));
+    } else {
+      dispatch(updatePost(post));
     }
   }
 });

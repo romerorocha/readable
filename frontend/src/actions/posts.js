@@ -55,3 +55,8 @@ export const removePost = id => async dispatch => {
   const deletedPost = await API.deletePost(id);
   return dispatch(remove(deletedPost));
 };
+
+export const updatePost = post => async dispatch => {
+  const updatedPost = await API.updatePost(post.id, post.title, post.body);
+  return dispatch(receivePost(updatedPost));
+};
