@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const NewPostMenu = ({ activeMenu }) => {
   return (
-    <Link to="/posts/new">
+    <Link to="/posts/edit">
       <Menu.Item
         name={NEW_POST}
         position="right"

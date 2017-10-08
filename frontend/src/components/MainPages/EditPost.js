@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { EMPTY } from '../../util/Constants';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { activateMenu } from '../../actions/UI';
 import { addPost } from '../../actions/posts';
 import { NEW_POST } from '../../util/Constants';
@@ -20,6 +21,14 @@ class NewPost extends Component {
 
   componentDidMount() {
     this.props.activate(NEW_POST);
+    this.handleExistingPost();
+  }
+
+  handleExistingPost() {
+    const post = this.props.location.state;
+    if (post) {
+      this.setState(post);
+    }
   }
 
   getCategories() {
@@ -32,23 +41,25 @@ class NewPost extends Component {
 
   handleSubmit = () => {
     this.props.save(this.state);
+    this.props.history.push('/');
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
   render() {
     const categories = this.getCategories();
-    const { category, author, title, body } = this.state;
+    const { category, author, title, body, id } = this.state;
 
     return (
       <Container style={{ marginTop: '7em' }}>
-        <Breadcrumbs category="new post" />
+        <Breadcrumbs category="post edit" />
         <Divider />
         <Form onSubmit={this.handleSubmit}>
           <Form.Dropdown
-            placeholder="Select Category"
             required
             label="Category"
+            placeholder="Select Category"
+            disabled={id !== EMPTY}
             fluid
             search
             selection
@@ -58,16 +69,17 @@ class NewPost extends Component {
             onChange={this.handleChange}
           />
           <Form.Input
-            label="Your name"
             required
+            label="Your name"
             placeholder="Name"
+            disabled={id !== EMPTY}
             name="author"
             value={author}
             onChange={this.handleChange}
           />
           <Form.Input
-            label="Post Title"
             required
+            label="Post Title"
             placeholder="Title"
             name="title"
             value={title}
@@ -112,4 +124,6 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewPost);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(NewPost)
+);

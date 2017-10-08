@@ -20,6 +20,17 @@ class PostDetail extends Component {
     this.props.history.push('/');
   };
 
+  handleEditing = () => {
+    const { id, category, author, title, body } = this.props.post;
+
+    const location = {
+      pathname: '/posts/edit',
+      state: { id, category, author, title, body }
+    };
+
+    this.props.history.push(location);
+  };
+
   render() {
     const { post, votePost } = this.props;
 
@@ -32,6 +43,7 @@ class PostDetail extends Component {
           vote={votePost}
           remove={this.handleRemoving}
           voteScore={post.voteScore}
+          edit={this.handleEditing}
         />
         <PostBody post={post} />
         <SortedComments postId={post.id} />
