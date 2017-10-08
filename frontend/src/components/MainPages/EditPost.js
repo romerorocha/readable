@@ -42,8 +42,9 @@ class NewPost extends Component {
 
   handleSubmit = () => {
     const { location, history, save } = this.props;
+    const category = this.state.category;
     save(this.state);
-    location.state ? history.goBack() : history.push('/');
+    location.state ? history.goBack() : history.push(`/${category}`);
   };
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
