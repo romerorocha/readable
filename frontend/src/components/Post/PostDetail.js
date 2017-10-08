@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { fetchPost, voteOnPost, removePost } from '../../actions/posts';
+import { activateMenu } from '../../actions/UI';
 import Breadcrumbs from '../Misc/Breadcrumbs';
 import SortedComments from '../../containers/SortedComments';
 import PostBody from './PostBody';
 import ActionButtons from './ActionButtons';
 import { Container, Divider } from 'semantic-ui-react';
-import { fetchPost, voteOnPost, removePost } from '../../actions/posts';
 
 class PostDetail extends Component {
   componentDidMount() {
+    this.props.activate('NONE');
     if (Object.keys(this.props.posts).length === 0) {
       this.props.loadPost();
     }
@@ -71,6 +73,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     remove: () => {
       dispatch(removePost(postId));
+    },
+    activate: menu => {
+      dispatch(activateMenu(menu));
     }
   };
 };

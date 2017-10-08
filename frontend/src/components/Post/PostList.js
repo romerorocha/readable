@@ -4,7 +4,7 @@ import { Item, Container } from 'semantic-ui-react';
 import OrderByButtons from './OrderByButtons';
 
 const PostList = ({ posts, voteAction }) => {
-  return (
+  return posts.length > 0 ? (
     <Container fluid>
       <OrderByButtons />
       <Item.Group divided>
@@ -13,6 +13,8 @@ const PostList = ({ posts, voteAction }) => {
         ))}
       </Item.Group>
     </Container>
+  ) : (
+    'ZERO posts at the moment :('
   );
 };
 

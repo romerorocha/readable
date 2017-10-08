@@ -20,7 +20,6 @@ class NewPost extends Component {
   };
 
   componentDidMount() {
-    this.props.activate(NEW_POST);
     this.handleExistingPost();
   }
 
@@ -28,6 +27,8 @@ class NewPost extends Component {
     const post = this.props.location.state;
     if (post) {
       this.setState(post);
+    } else {
+      this.props.activate(NEW_POST);
     }
   }
 
