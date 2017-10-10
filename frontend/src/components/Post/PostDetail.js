@@ -24,7 +24,6 @@ class PostDetail extends Component {
 
   handleEditing = () => {
     const { id, category, author, title, body } = this.props.post;
-
     const location = {
       pathname: '/posts/edit',
       state: { id, category, author, title, body }
