@@ -8,17 +8,18 @@ import CategoryPosts from '../Post/CategoryPosts';
 
 class Category extends Component {
   componentDidMount() {
-    this.initComponent();
+    this.initComponent(this.props.match.params.category);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.match.params.category !== nextProps.match.params.category) {
-      this.initComponent();
+    const category = nextProps.match.params.category;
+
+    if (this.props.match.params.category !== category) {
+      this.initComponent(category);
     }
   }
 
-  initComponent() {
-    const { category } = this.props.match.params;
+  initComponent(category) {
     this.props.activate(category);
     this.props.fetchPosts(category);
   }
