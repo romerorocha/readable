@@ -14,4 +14,5 @@ To get started right away:
     - `node server`
 * Install and start the App Front-end
     - `cd frontend`
+    - `yarn install`
     - `yarn start`
