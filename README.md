@@ -1,4 +1,4 @@
-# Readable API Server
+# Readable API
 
 This is the project for the final assessment project for Udacity's Redux course (React Nanodegree)
 
