@@ -1,4 +1,4 @@
-# Readable API
+# Readable App
 
 This is the project for the final assessment project for Udacity's Redux course (React Nanodegree)
 
