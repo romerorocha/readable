@@ -2,9 +2,9 @@
 
 This is the project for the final assessment project for Udacity's Redux course (React Nanodegree)
 
-This repository includes the code for the backend API Server. The server was updated from the standard provided server to include more initial data and some more details (category icons).
+This repository includes the code for the backend API Server and the frontend application. The server was updated from the standard provided server to include more initial data and some more details (category icons).
 
-## Installing
+## Installing & Running
 
 To get started right away:
 
@@ -12,7 +12,7 @@ To get started right away:
     - `cd api-server`
     - `yarn install`
     - `node server`
-* Install and start the App Front-end
+* Install and start the App Frontend
     - `cd frontend`
     - `yarn install`
     - `yarn start`
