@@ -3,8 +3,9 @@
 This is the project for the final assessment project for Udacity's Redux course (React Nanodegree)
 
 This repository includes:
-    * The code for the Frontend App, made in React + Redux (this folder).
-    * The code for the backend API Server. The server was upgraded (based on the standard provided server) to include more initial data and some more details (category icons). You need to run this version so proper initial data is loaded.
+
+* The code for the Frontend App, made in React + Redux (this folder).
+* The code for the backend API Server. The server was upgraded (based on the standard provided server) to include more initial data and some more details (category icons). You need to run this version so proper initial data is loaded.
 
 ## Installing & Running
 
