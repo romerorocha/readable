@@ -9,8 +9,6 @@ This repository includes:
 
 ## Installing & Running
 
-To get started right away:
-
 * Install and start the API server
     - `cd api-server`
     - `yarn install`
