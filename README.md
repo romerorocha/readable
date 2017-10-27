@@ -13,7 +13,7 @@ This repository includes:
     - `cd api-server`
     - `yarn install`
     - `node server`
-* Install and start the App Frontend
+* Install and start the Frontend App
     - `cd frontend`
     - `yarn install`
     - `yarn start`
