@@ -24,8 +24,8 @@ To get started right away:
 ## Features
 
 As an user, you are able to:
-    * View existing posts (general or by category);
-    * Add/Edit/Delete posts;
-    * Vote and comment on posts;
-    * View and sort by vote score or post date;
-    * View/Edit/Delete comments.
+* View existing posts (general or by category);
+* Add/Edit/Delete posts;
+* Vote and comment on posts;
+* View and sort by vote score or post date;
+* View/Edit/Delete comments.
